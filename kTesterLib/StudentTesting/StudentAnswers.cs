@@ -10,7 +10,7 @@ namespace kTesterLib.StudentTesting
     /// <summary>
     /// Класс ответов на тест студента
     /// </summary>
-    public class StudentAnswers
+    public class StudentAnswer
     {
         public int Id { get; set; }
         public int StudentTestId { get; set; }

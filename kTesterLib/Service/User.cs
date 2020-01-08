@@ -15,5 +15,21 @@ namespace kTesterLib.Service
         public string Login { get;  set; }
         public string Password { get;  set; }
         public UserRights UserRights { get;  set; }
+
+        public User(string login, string password)
+        {
+            Login = login;
+            Password = password;
+        }
+
+        public User(int id, string login, string password, int rights)
+        {
+            Id = id;
+            Login = login;
+            Password = password;
+            UserRights = (UserRights)rights;
+        }
+
+        public User() { }
     }
 }
