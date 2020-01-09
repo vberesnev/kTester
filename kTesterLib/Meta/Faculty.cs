@@ -15,5 +15,13 @@ namespace kTesterLib.Meta
         public string Name { get; set; }
 
         public List<StudyGroup> StudyGroups;
+
+        public Faculty() { }
+
+        public Faculty(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

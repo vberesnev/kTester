@@ -38,6 +38,7 @@ namespace kTesterServer
                         data.Append(Encoding.UTF8.GetString(buffer, 0, bytes));
                     }
                     while (handler.Available > 0);
+                    Console.WriteLine(data.ToString());
 
                     RequestParser request = new RequestParser(data.ToString());
 

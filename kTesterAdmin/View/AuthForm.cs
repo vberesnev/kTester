@@ -29,14 +29,16 @@ namespace kTesterAdmin
                 Tuple<bool, string> result = await authController.AuthAsync(login_textBox.Text, password_textBox.Text);
                 if (result.Item1)
                 {
-                    MessageBox.Show("ОК");
+                    MainForm mainForm = new MainForm(authController);
+                    this.Hide();
+                    mainForm.ShowDialog();
+                    this.Show();
                 }
                 else
                 {
                     MessageBox.Show(result.Item2);
                 }
             }
-            
         }
 
         private void close_button_Click(object sender, EventArgs e)
@@ -54,7 +56,6 @@ namespace kTesterAdmin
             this.Hide();
             SF.ShowDialog();
             this.Show();
-            
         }
 
         #region ДВИЖЕНИЕ ФОРМЫ МЫШКОЙ

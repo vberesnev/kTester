@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using kTesterLib.Service;
 using System.Data.SqlClient;
+using kTesterLib.Meta;
 
 namespace kTesterServer
 {
@@ -12,7 +13,9 @@ namespace kTesterServer
 
         static Dictionary<string, string> storageProcedures = new Dictionary<string, string>()
         {
-            { "AUTH", "sp_GetUser" }
+            { "AUTH", "sp_AuthUser" },
+            { "GET_FAC", "sp_GetFaculties"}
+
         };
 
         public static User GetUser(User user, string serverParametr)
@@ -48,14 +51,45 @@ namespace kTesterServer
             }
             catch (SqlException ex)
             {
-                ServerLog.Log($"ОШИБКА авторизации пользователя {user.Login} с паролем {user.Password}");
+                ServerLog.Log($"ОШИБКА авторизации пользователя {user.Login} с паролем {user.Password}: {ex.Message}");
                 return null;
             }
             finally
             {
                 // закрываем подключение
                 connection.Close();
-                Console.WriteLine("Подключение закрыто...");
+            }
+        }
+
+        internal static List<Faculty> GetFaculties(string serverParametr)
+        {
+            List<Faculty> faculties = new List<Faculty>();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            try
+            {
+                // Открываем подключение
+                connection.Open();
+                //хранимая процедура поиска пользователя в таблице Users
+                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                var result = command.ExecuteReader();
+                while (result.Read())
+                {
+                    faculties.Add(new Faculty((int)result[0], result[1].ToString()));
+                }
+                return faculties;
+            }
+            catch (SqlException ex)
+            {
+                ServerLog.Log($"ОШИБКА получения списка факультетов {ex.Message}");
+                return null;
+            }
+            finally
+            {
+                // закрываем подключение
+                connection.Close();
             }
         }
     }

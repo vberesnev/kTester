@@ -36,6 +36,9 @@ namespace kTesterAdmin.Controller
                 }
                 while (socket.Available > 0);
 
+                if (builder.ToString() == "false")
+                    return new Tuple<bool, string>(false, "Неопознанный запрос");
+
                 return new Tuple<bool, string>(true, builder.ToString());
             }
             catch(Exception ex)

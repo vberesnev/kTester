@@ -29,7 +29,7 @@ namespace kTesterAdmin.Model
                 {
                     instance = new Settings();
                     instance.Ip = "127.0.0.1";
-                    instance.Port = 8002;
+                    instance.Port = 8005;
                     Save();
                 }
             }
