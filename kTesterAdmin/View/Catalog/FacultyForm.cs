@@ -28,5 +28,17 @@ namespace kTesterAdmin.View.Catalog
             message("Загрузка данных, подождите . . . ");
             facultyController.GetFacultiesAsync();
         }
+
+        private void addFaculty_button_Click(object sender, EventArgs e)
+        {
+            message("Добавление факультета, подождите . . . ");
+            facultyController.AddFacultyAsync("Механико-механический");
+        }
+
+        private void delete_button_Click(object sender, EventArgs e)
+        {
+            message("Удаление факультета . . .");
+            facultyController.DeleteFacultyAsync(8);
+        }
     }
 }

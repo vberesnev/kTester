@@ -36,8 +36,10 @@ namespace kTesterAdmin.Controller
                 }
                 while (socket.Available > 0);
 
-                if (builder.ToString() == "false")
+                if (builder.ToString() == "Unknown")
                     return new Tuple<bool, string>(false, "Неопознанный запрос");
+                if (builder.ToString() == "Exception")
+                    return new Tuple<bool, string>(false, "Сервер вернул ошибку выполнения запроса, обратитесь к администратору");
 
                 return new Tuple<bool, string>(true, builder.ToString());
             }

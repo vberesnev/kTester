@@ -4,6 +4,7 @@ using System.Text;
 using kTesterLib.Service;
 using System.Data.SqlClient;
 using kTesterLib.Meta;
+using System.Linq;
 
 namespace kTesterServer
 {
@@ -13,20 +14,37 @@ namespace kTesterServer
 
         static Dictionary<string, string> storageProcedures = new Dictionary<string, string>()
         {
-            { "AUTH", "sp_AuthUser" },
-            { "GET_FAC", "sp_GetFaculties"}
+            { "USER_AUTH", "sp_UserAuth" },
+            { "FAC_GET", "sp_FacultiesGet"},
+            { "FAC_GET_ONE", "sp_FacultyGetById"},
+            { "FAC_ADD", "sp_FacultyAdd"},
+            { "FAC_DLT", "sp_FacultyDlt"},
+            { "FAC_EXST",  "sp_FacultyExist"}
 
         };
 
+        #region Проверка на существование записи в таблице
+        private static bool IsExist(Dictionary<string, string> searchParametrs, string serverParametr, SqlConnection connection)
+        {
+            SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            foreach (KeyValuePair<string, string> parametr in searchParametrs)
+            {
+                SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                command.Parameters.Add(sqlParametr);
+            }
+            int result = (int)command.ExecuteScalar();
+            return result > 0;
+        }
+        #endregion
+
+        #region Авторизация пользователей
         public static User GetUser(User user, string serverParametr)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-
             try
             {
-                // Открываем подключение
                 connection.Open();
-                //хранимая процедура поиска пользователя в таблице Users
                 SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter loginP = new SqlParameter() { ParameterName = "@login", Value = user.Login };
@@ -56,41 +74,114 @@ namespace kTesterServer
             }
             finally
             {
-                // закрываем подключение
+                connection.Close();
+            }
+        }
+        #endregion
+
+        internal static bool DefaultDeleteQuery(Dictionary<string, string> dict, string serverParametr)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                foreach (KeyValuePair<string, string> parametr in dict)
+                {
+                    SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                    command.Parameters.Add(sqlParametr);
+                }
+
+                var result = command.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                ServerLog.Log($"ОШИБКА удаления данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
+                              $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return false;
+            }
+            finally
+            {
                 connection.Close();
             }
         }
 
-        internal static List<Faculty> GetFaculties(string serverParametr)
+        #region Запросы к таблице факультетов FACULTIES
+        internal static List<object[]> DefaultSelectQuery(string serverParametr)
         {
-            List<Faculty> faculties = new List<Faculty>();
+            List<object[]> list = new List<object[]>();
             SqlConnection connection = new SqlConnection(connectionString);
-
             try
             {
-                // Открываем подключение
                 connection.Open();
-                //хранимая процедура поиска пользователя в таблице Users
                 SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
                 var result = command.ExecuteReader();
                 while (result.Read())
                 {
-                    faculties.Add(new Faculty((int)result[0], result[1].ToString()));
+                    object[] values = new Object[result.FieldCount]; 
+                    int fieldCount = result.GetValues(values);
+                    list.Add(values);
                 }
-                return faculties;
+                return list ;
             }
             catch (SqlException ex)
             {
-                ServerLog.Log($"ОШИБКА получения списка факультетов {ex.Message}");
+                ServerLog.Log($"ОШИБКА выборки данных, хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
                 return null;
             }
             finally
             {
-                // закрываем подключение
                 connection.Close();
             }
         }
+
+        internal static int AddFaculty(Dictionary<string, string> dict, string serverParametr)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                if (!IsExist(dict, "FAC_EXST", connection))
+                {
+                    SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    foreach (KeyValuePair<string, string> parametr in dict)
+                    {
+                        SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                        command.Parameters.Add(sqlParametr);
+                    }
+                    SqlParameter outputSqlParametr = new SqlParameter()
+                    {
+                        ParameterName = "@id",
+                        SqlDbType = System.Data.SqlDbType.Int,
+                        Direction = System.Data.ParameterDirection.Output
+                    };
+                    command.Parameters.Add(outputSqlParametr);
+                    command.ExecuteNonQuery();
+                    return (int)command.Parameters["@id"].Value;
+                }
+                return 0;
+            }
+            catch (SqlException ex)
+            {
+                ServerLog.Log($"ОШИБКА добавления данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
+                               $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        #endregion
+
+
+        
     }
 }

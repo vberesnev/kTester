@@ -18,7 +18,7 @@ namespace kTesterAdmin.Controller
         
         public AuthController() 
         {
-            serverParametr = "AUTH";
+            serverParametr = "USER_AUTH";
         }
 
         public string UserName
