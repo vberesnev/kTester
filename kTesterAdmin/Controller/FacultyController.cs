@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,14 @@ namespace kTesterAdmin.Controller
         [JsonRequired]
         private string userParametr;
         
-
         private Faculty currentFaculty;
 
-        [JsonIgnore]
-        public List<Faculty> Faculties;
+        private List<Faculty> faculties;
         private Dictionary<string, string> serverParametrsDict;
+
+        [JsonIgnore]
+        public BindingList<Faculty> DataSourse;
+
 
         [JsonRequired]
         private Dictionary<string, string> queryParametrsDict;
@@ -30,7 +33,8 @@ namespace kTesterAdmin.Controller
 
         public FacultyController(Action<string> mes, string userName)
         {
-            Faculties = new List<Faculty>();
+            faculties = new List<Faculty>();
+            DataSourse = new BindingList<Faculty>(faculties);
             currentFaculty = new Faculty();
             userParametr = userName;
             serverParametrsDict = new Dictionary<string, string>()
@@ -42,54 +46,58 @@ namespace kTesterAdmin.Controller
             };
 
             queryParametrsDict = new Dictionary<string, string>();
-
-
             message = mes;
         }
 
-        internal Task<List<Faculty>> GetFacultiesAsync()
+        internal Task<BindingList<Faculty>> GetFacultiesAsync()
         {
             serverParametr = serverParametrsDict["getFaculties"];
-            var task = new Task<List<Faculty>>(
+            var task = new Task<BindingList<Faculty>>(
                 () => {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     if (result.Item1)
                     {
-                        Faculties.Clear();
+                        faculties.Clear();
+                        //DataSourse.Clear();
                         List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
                         foreach (var arr in list)
-                            Faculties.Add(new Faculty(Convert.ToInt32(arr[0]), arr[1].ToString()));
+                            faculties.Add(new Faculty(Convert.ToInt32(arr[0]), arr[1].ToString()));
 
-                        if (Faculties.Count == 0)
+                        if (faculties.Count == 0)
                             message("Нет ниодного факультета. Добавьте данные");
                         else
-                            message(String.Empty);
+                        {
+                            DataSourse = new BindingList<Faculty>(faculties);
+                            message("Данные загружены");
+                        }
                     }
                     else
                         message($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
 
-                    return Faculties;
+                    return DataSourse;
                 });
             task.Start();
             return task;
         }
 
-        internal Task DeleteFacultyAsync(int id)
+        internal Task<bool> DeleteFacultyAsync(int id)
         {
             serverParametr = serverParametrsDict["deleteFaculty"];
             queryParametrsDict.Clear();
             queryParametrsDict.Add("@id", id.ToString());
 
-            var task = new Task(
+            var task = new Task<bool>(
                 () => {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     if (!result.Item1)
                     {
                         message($"Ошибка удаления факультета:\r\n{result.Item2}\r\nОбратитесь к администратору");
+                        return false;
                     }
                     else
                     {
                         message("Удалено");
+                        return true;
                     }
                 });
             task.Start();
