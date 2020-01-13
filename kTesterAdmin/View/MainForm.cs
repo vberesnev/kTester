@@ -20,6 +20,7 @@ namespace kTesterAdmin.View
         {
             InitializeComponent();
             this.authController = authController;
+            this.MinimumSize = new Size(650, 400);
         }
 
         //Удалить после окончания разработки

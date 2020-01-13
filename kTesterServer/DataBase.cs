@@ -19,6 +19,7 @@ namespace kTesterServer
             { "FAC_GET_ONE", "sp_FacultyGetById"},
             { "FAC_ADD", "sp_FacultyAdd"},
             { "FAC_DLT", "sp_FacultyDlt"},
+            { "FAC_EDT", "sp_FacultyEdt"},
             { "FAC_EXST",  "sp_FacultyExist"}
 
         };
@@ -100,6 +101,36 @@ namespace kTesterServer
             catch (SqlException ex)
             {
                 ServerLog.Log($"ОШИБКА удаления данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
+                              $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        internal static bool DefaultEditQuery(Dictionary<string, string> dict, string serverParametr)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                foreach (KeyValuePair<string, string> parametr in dict)
+                {
+                    SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                    command.Parameters.Add(sqlParametr);
+                }
+
+                var result = command.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                ServerLog.Log($"ОШИБКА редактирования данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
                               $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
                 return false;
             }

@@ -19,7 +19,8 @@ namespace kTesterServer
             { "USER_AUTH", "вошёл в систему"},
             { "FAC_GET", "загрузил список факультетов"},
             { "FAC_ADD", "добавил новый факультет"},
-            { "FAC_DLT", "удалил факультет"}
+            { "FAC_DLT", "удалил факультет"},
+            { "FAC_EDT", "отредактировал факультет"}
         };
 
         public RequestParser(string request)
@@ -79,8 +80,16 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_DLT": //удалить факультет
-                    bool result = DataBase.DefaultDeleteQuery(dict, serverParametr);
-                    if (result)
+                    bool resultDlt = DataBase.DefaultDeleteQuery(dict, serverParametr);
+                    if (resultDlt)
+                    {
+                        isSuccess = true;
+                        response = "Success";
+                    }
+                    break;
+                case "FAC_EDT": //удалить факультет
+                    bool resultEdt = DataBase.DefaultEditQuery(dict, serverParametr);
+                    if (resultEdt)
                     {
                         isSuccess = true;
                         response = "Success";

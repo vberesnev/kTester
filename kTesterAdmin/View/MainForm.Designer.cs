@@ -65,26 +65,26 @@
             // faculty_ToolStripMenuItem
             // 
             this.faculty_ToolStripMenuItem.Name = "faculty_ToolStripMenuItem";
-            this.faculty_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.faculty_ToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.faculty_ToolStripMenuItem.Text = "Факультеты";
             this.faculty_ToolStripMenuItem.Click += new System.EventHandler(this.facultyToolStripMenuItem_Click);
             // 
             // studyGroups_ToolStripMenuItem
             // 
             this.studyGroups_ToolStripMenuItem.Name = "studyGroups_ToolStripMenuItem";
-            this.studyGroups_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.studyGroups_ToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.studyGroups_ToolStripMenuItem.Text = "Группы";
             // 
             // professors_ToolStripMenuItem
             // 
             this.professors_ToolStripMenuItem.Name = "professors_ToolStripMenuItem";
-            this.professors_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.professors_ToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.professors_ToolStripMenuItem.Text = "Преподаватели";
             // 
             // subjects_ToolStripMenuItem
             // 
             this.subjects_ToolStripMenuItem.Name = "subjects_ToolStripMenuItem";
-            this.subjects_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.subjects_ToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.subjects_ToolStripMenuItem.Text = "Предменты";
             // 
             // users_ToolStripMenuItem
@@ -107,6 +107,7 @@
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(650, 450);
             this.Name = "MainForm";
             this.Text = "kTester";
             this.menuStrip.ResumeLayout(false);
