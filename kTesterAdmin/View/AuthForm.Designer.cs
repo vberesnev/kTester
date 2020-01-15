@@ -31,12 +31,12 @@
             this.auth_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.header_panel = new System.Windows.Forms.Panel();
+            this.settings_button = new System.Windows.Forms.Button();
+            this.close_button = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.password_textBox = new System.Windows.Forms.TextBox();
-            this.settings_button = new System.Windows.Forms.Button();
-            this.close_button = new System.Windows.Forms.Button();
             this.header_panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +46,7 @@
             this.auth_button.FlatAppearance.BorderSize = 0;
             this.auth_button.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.auth_button.ForeColor = System.Drawing.Color.White;
-            this.auth_button.Location = new System.Drawing.Point(82, 234);
+            this.auth_button.Location = new System.Drawing.Point(89, 234);
             this.auth_button.Name = "auth_button";
             this.auth_button.Size = new System.Drawing.Size(112, 40);
             this.auth_button.TabIndex = 0;
@@ -79,6 +79,41 @@
             this.header_panel.TabIndex = 3;
             this.header_panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDownEvent);
             this.header_panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMoveEvent);
+            // 
+            // settings_button
+            // 
+            this.settings_button.BackColor = System.Drawing.Color.Transparent;
+            this.settings_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.settings;
+            this.settings_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.settings_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.settings_button.FlatAppearance.BorderSize = 0;
+            this.settings_button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.settings_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.settings_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settings_button.Location = new System.Drawing.Point(209, 6);
+            this.settings_button.Name = "settings_button";
+            this.settings_button.Size = new System.Drawing.Size(35, 34);
+            this.settings_button.TabIndex = 3;
+            this.settings_button.UseVisualStyleBackColor = false;
+            this.settings_button.Click += new System.EventHandler(this.settings_button_Click);
+            // 
+            // close_button
+            // 
+            this.close_button.BackColor = System.Drawing.Color.Transparent;
+            this.close_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.exit;
+            this.close_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.close_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.close_button.FlatAppearance.BorderSize = 0;
+            this.close_button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.close_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.close_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.close_button.Location = new System.Drawing.Point(250, 6);
+            this.close_button.Name = "close_button";
+            this.close_button.Size = new System.Drawing.Size(35, 34);
+            this.close_button.TabIndex = 2;
+            this.close_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.close_button.UseVisualStyleBackColor = false;
+            this.close_button.Click += new System.EventHandler(this.close_button_Click);
             // 
             // label2
             // 
@@ -117,46 +152,10 @@
             this.password_textBox.Size = new System.Drawing.Size(261, 26);
             this.password_textBox.TabIndex = 7;
             // 
-            // settings_button
-            // 
-            this.settings_button.BackColor = System.Drawing.Color.Transparent;
-            this.settings_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.settings;
-            this.settings_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.settings_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.settings_button.FlatAppearance.BorderSize = 0;
-            this.settings_button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.settings_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.settings_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settings_button.Location = new System.Drawing.Point(209, 6);
-            this.settings_button.Name = "settings_button";
-            this.settings_button.Size = new System.Drawing.Size(35, 34);
-            this.settings_button.TabIndex = 3;
-            this.settings_button.UseVisualStyleBackColor = false;
-            this.settings_button.Click += new System.EventHandler(this.settings_button_Click);
-            // 
-            // close_button
-            // 
-            this.close_button.BackColor = System.Drawing.Color.Transparent;
-            this.close_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.exit;
-            this.close_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.close_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.close_button.FlatAppearance.BorderSize = 0;
-            this.close_button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.close_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.close_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.close_button.Location = new System.Drawing.Point(250, 6);
-            this.close_button.Name = "close_button";
-            this.close_button.Size = new System.Drawing.Size(35, 34);
-            this.close_button.TabIndex = 2;
-            this.close_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.close_button.UseVisualStyleBackColor = false;
-            this.close_button.Click += new System.EventHandler(this.close_button_Click);
-            // 
             // AuthForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(286, 286);
             this.Controls.Add(this.password_textBox);
             this.Controls.Add(this.login_textBox);
@@ -164,10 +163,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.header_panel);
             this.Controls.Add(this.auth_button);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+
             this.Name = "AuthForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+
+            this.Text = "Войти";
             this.header_panel.ResumeLayout(false);
             this.header_panel.PerformLayout();
             this.ResumeLayout(false);

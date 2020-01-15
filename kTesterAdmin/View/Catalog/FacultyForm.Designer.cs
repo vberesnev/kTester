@@ -2,15 +2,15 @@
 {
     partial class FacultyForm
     {
-        /// <summary>
-        /// Required designer variable.
+        /// <summary> 
+        /// Обязательная переменная конструктора.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
+        /// <summary> 
+        /// Освободить все используемые ресурсы.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,188 +20,142 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Код, автоматически созданный конструктором компонентов
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// <summary> 
+        /// Требуемый метод для поддержки конструктора — не изменяйте 
+        /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label1 = new System.Windows.Forms.Label();
-            this.info_label = new System.Windows.Forms.Label();
-            this.faculties_dataGridView = new System.Windows.Forms.DataGridView();
-            this.faculty_panel = new System.Windows.Forms.Panel();
-            this.save_button = new System.Windows.Forms.Button();
-            this.id_textBox = new System.Windows.Forms.TextBox();
-            this.close_button = new System.Windows.Forms.Button();
-            this.name_textBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.addFaculty_button = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.faculties_dataGridView)).BeginInit();
-            this.faculty_panel.SuspendLayout();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.add_metroTile = new MetroFramework.Controls.MetroTile();
+            this.edit_metroTile = new MetroFramework.Controls.MetroTile();
+            this.delete_metroTile = new MetroFramework.Controls.MetroTile();
+            this.faculties_metroGrid = new MetroFramework.Controls.MetroGrid();
+            this.info_metroLabel = new MetroFramework.Controls.MetroLabel();
+            this.facultyBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.faculties_metroGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facultyBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // add_metroTile
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(15, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Факультеты";
+            this.add_metroTile.ActiveControl = null;
+            this.add_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.add_metroTile.Location = new System.Drawing.Point(254, 3);
+            this.add_metroTile.Name = "add_metroTile";
+            this.add_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.add_metroTile.TabIndex = 4;
+            this.add_metroTile.Text = "Добавить";
+            this.add_metroTile.UseSelectable = true;
             // 
-            // info_label
+            // edit_metroTile
             // 
-            this.info_label.AutoSize = true;
-            this.info_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.info_label.Location = new System.Drawing.Point(15, 47);
-            this.info_label.Name = "info_label";
-            this.info_label.Size = new System.Drawing.Size(0, 16);
-            this.info_label.TabIndex = 1;
+            this.edit_metroTile.ActiveControl = null;
+            this.edit_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.edit_metroTile.Location = new System.Drawing.Point(365, 3);
+            this.edit_metroTile.Name = "edit_metroTile";
+            this.edit_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.edit_metroTile.TabIndex = 4;
+            this.edit_metroTile.Text = "Править";
+            this.edit_metroTile.UseSelectable = true;
             // 
-            // faculties_dataGridView
+            // delete_metroTile
             // 
-            this.faculties_dataGridView.AllowUserToAddRows = false;
-            this.faculties_dataGridView.AllowUserToDeleteRows = false;
-            this.faculties_dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.faculties_dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.delete_metroTile.ActiveControl = null;
+            this.delete_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.delete_metroTile.Location = new System.Drawing.Point(476, 3);
+            this.delete_metroTile.Name = "delete_metroTile";
+            this.delete_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.delete_metroTile.Style = MetroFramework.MetroColorStyle.Red;
+            this.delete_metroTile.TabIndex = 4;
+            this.delete_metroTile.Text = "Удалить";
+            this.delete_metroTile.UseSelectable = true;
+            // 
+            // faculties_metroGrid
+            // 
+            this.faculties_metroGrid.AllowUserToAddRows = false;
+            this.faculties_metroGrid.AllowUserToDeleteRows = false;
+            this.faculties_metroGrid.AllowUserToResizeRows = false;
+            this.faculties_metroGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.faculties_metroGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.faculties_metroGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.faculties_metroGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.faculties_metroGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.faculties_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.faculties_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            this.faculties_metroGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.faculties_metroGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.faculties_dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.faculties_dataGridView.Location = new System.Drawing.Point(15, 100);
-            this.faculties_dataGridView.MultiSelect = false;
-            this.faculties_dataGridView.Name = "faculties_dataGridView";
-            this.faculties_dataGridView.ReadOnly = true;
-            this.faculties_dataGridView.RowHeadersVisible = false;
-            this.faculties_dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.faculties_dataGridView.Size = new System.Drawing.Size(320, 200);
-            this.faculties_dataGridView.TabIndex = 4;
-            this.faculties_dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.faculties_dataGridView_CellClick);
+            this.faculties_metroGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            this.faculties_metroGrid.EnableHeadersVisualStyles = false;
+            this.faculties_metroGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.faculties_metroGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.faculties_metroGrid.Location = new System.Drawing.Point(22, 120);
+            this.faculties_metroGrid.Name = "faculties_metroGrid";
+            this.faculties_metroGrid.ReadOnly = true;
+            this.faculties_metroGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.faculties_metroGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.faculties_metroGrid.RowHeadersVisible = false;
+            this.faculties_metroGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.faculties_metroGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.faculties_metroGrid.Size = new System.Drawing.Size(559, 384);
+            this.faculties_metroGrid.TabIndex = 5;
             // 
-            // faculty_panel
+            // info_metroLabel
             // 
-            this.faculty_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.faculty_panel.BackColor = System.Drawing.SystemColors.Window;
-            this.faculty_panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.faculty_panel.Controls.Add(this.save_button);
-            this.faculty_panel.Controls.Add(this.id_textBox);
-            this.faculty_panel.Controls.Add(this.close_button);
-            this.faculty_panel.Controls.Add(this.name_textBox);
-            this.faculty_panel.Controls.Add(this.label2);
-            this.faculty_panel.Location = new System.Drawing.Point(367, 100);
-            this.faculty_panel.Name = "faculty_panel";
-            this.faculty_panel.Size = new System.Drawing.Size(271, 200);
-            this.faculty_panel.TabIndex = 5;
-            this.faculty_panel.Visible = false;
+            this.info_metroLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.info_metroLabel.AutoSize = true;
+            this.info_metroLabel.Location = new System.Drawing.Point(22, 544);
+            this.info_metroLabel.Name = "info_metroLabel";
+            this.info_metroLabel.Size = new System.Drawing.Size(81, 19);
+            this.info_metroLabel.TabIndex = 6;
+            this.info_metroLabel.Text = "metroLabel1";
             // 
-            // save_button
+            // facultyBindingSource
             // 
-            this.save_button.Location = new System.Drawing.Point(171, 90);
-            this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(75, 23);
-            this.save_button.TabIndex = 5;
-            this.save_button.Text = "Сохранить";
-            this.save_button.UseVisualStyleBackColor = true;
-            this.save_button.Click += new System.EventHandler(this.save_button_Click);
-            // 
-            // id_textBox
-            // 
-            this.id_textBox.Location = new System.Drawing.Point(14, 90);
-            this.id_textBox.Name = "id_textBox";
-            this.id_textBox.Size = new System.Drawing.Size(52, 20);
-            this.id_textBox.TabIndex = 4;
-            // 
-            // close_button
-            // 
-            this.close_button.BackColor = System.Drawing.Color.Transparent;
-            this.close_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.exit;
-            this.close_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.close_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.close_button.FlatAppearance.BorderSize = 0;
-            this.close_button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.close_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.close_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.close_button.Location = new System.Drawing.Point(241, 3);
-            this.close_button.Name = "close_button";
-            this.close_button.Size = new System.Drawing.Size(25, 25);
-            this.close_button.TabIndex = 3;
-            this.close_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.close_button.UseVisualStyleBackColor = false;
-            this.close_button.Click += new System.EventHandler(this.close_button_Click);
-            // 
-            // name_textBox
-            // 
-            this.name_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.name_textBox.Location = new System.Drawing.Point(14, 43);
-            this.name_textBox.Name = "name_textBox";
-            this.name_textBox.Size = new System.Drawing.Size(233, 26);
-            this.name_textBox.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(11, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Факультет";
-            // 
-            // addFaculty_button
-            // 
-            this.addFaculty_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addFaculty_button.BackColor = System.Drawing.Color.Transparent;
-            this.addFaculty_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.blue_plus;
-            this.addFaculty_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addFaculty_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addFaculty_button.FlatAppearance.BorderSize = 0;
-            this.addFaculty_button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.addFaculty_button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.addFaculty_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addFaculty_button.Location = new System.Drawing.Point(561, 325);
-            this.addFaculty_button.Name = "addFaculty_button";
-            this.addFaculty_button.Size = new System.Drawing.Size(73, 63);
-            this.addFaculty_button.TabIndex = 4;
-            this.addFaculty_button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.addFaculty_button.UseVisualStyleBackColor = false;
-            this.addFaculty_button.Click += new System.EventHandler(this.addFaculty_button_Click);
+            this.facultyBindingSource.DataSource = typeof(kTesterLib.Meta.Faculty);
             // 
             // FacultyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 400);
-            this.Controls.Add(this.addFaculty_button);
-            this.Controls.Add(this.faculty_panel);
-            this.Controls.Add(this.faculties_dataGridView);
-            this.Controls.Add(this.info_label);
-            this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(this.info_metroLabel);
+            this.Controls.Add(this.faculties_metroGrid);
+            this.Controls.Add(this.delete_metroTile);
+            this.Controls.Add(this.edit_metroTile);
+            this.Controls.Add(this.add_metroTile);
             this.Name = "FacultyForm";
-            this.Text = "FacultyForm";
+            this.Size = new System.Drawing.Size(584, 587);
             this.Load += new System.EventHandler(this.FacultyForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.faculties_dataGridView)).EndInit();
-            this.faculty_panel.ResumeLayout(false);
-            this.faculty_panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.faculties_metroGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facultyBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,15 +163,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label info_label;
-        private System.Windows.Forms.DataGridView faculties_dataGridView;
-        private System.Windows.Forms.Panel faculty_panel;
-        private System.Windows.Forms.TextBox name_textBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button close_button;
-        private System.Windows.Forms.Button addFaculty_button;
-        private System.Windows.Forms.TextBox id_textBox;
-        private System.Windows.Forms.Button save_button;
+        public MetroFramework.Controls.MetroTile add_metroTile;
+        public MetroFramework.Controls.MetroTile edit_metroTile;
+        public MetroFramework.Controls.MetroTile delete_metroTile;
+        private MetroFramework.Controls.MetroGrid faculties_metroGrid;
+        private MetroFramework.Controls.MetroLabel info_metroLabel;
+        private System.Windows.Forms.BindingSource facultyBindingSource;
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using kTesterAdmin.Controller;
 using kTesterAdmin.View;
 
+
 namespace kTesterAdmin
 {
     public partial class AuthForm : Form
@@ -29,7 +30,7 @@ namespace kTesterAdmin
                 Tuple<bool, string> result = await authController.AuthAsync(login_textBox.Text, password_textBox.Text);
                 if (result.Item1)
                 {
-                    MainForm mainForm = new MainForm(authController);
+                    MainForm2 mainForm = new MainForm2(authController);
                     this.Hide();
                     mainForm.ShowDialog();
                     this.Show();
