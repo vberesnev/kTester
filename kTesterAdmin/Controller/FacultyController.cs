@@ -10,14 +10,15 @@ using Newtonsoft.Json;
 
 namespace kTesterAdmin.Controller
 {   
-    class FacultyController
+    public class FacultyController
     {
         [JsonRequired]
         private string serverParametr;
         [JsonRequired]
         private string userParametr;
-        
-        private Faculty currentFaculty;
+
+        [JsonIgnore]
+        public Faculty CurrentFaculty { get; private set; }
 
         private List<Faculty> faculties;
         private Dictionary<string, string> serverParametrsDict;
@@ -30,13 +31,12 @@ namespace kTesterAdmin.Controller
         private Dictionary<string, string> queryParametrsDict;
 
 
+        private Action<string> info;
         private Action<string> message;
 
-        public FacultyController(Action<string> mes, string userName)
+        public FacultyController(Action<string> info, Action<string> mess, string userName)
         {
             faculties = new List<Faculty>();
-            DataSourse = new BindingList<Faculty>(faculties);
-            currentFaculty = new Faculty();
             userParametr = userName;
             serverParametrsDict = new Dictionary<string, string>()
             {
@@ -47,7 +47,17 @@ namespace kTesterAdmin.Controller
             };
 
             queryParametrsDict = new Dictionary<string, string>();
-            message = mes;
+            this.info = info;
+            message = mess;
+
+        }
+
+        public void SetCurrentFaculty(int id=0)
+        {
+            if (id == 0)
+                CurrentFaculty = new Faculty();
+            else
+                CurrentFaculty = faculties.FirstOrDefault(x => x.Id == id);
         }
 
         internal Task<BindingList<Faculty>> GetFacultiesAsync()
@@ -57,23 +67,20 @@ namespace kTesterAdmin.Controller
             var task = new Task<BindingList<Faculty>>(
                 () => {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
+                    DataSourse = null;
                     if (result.Item1)
                     {
                         faculties.Clear();
-                        DataSourse = new BindingList<Faculty>();
                         List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
                         foreach (var arr in list)
                             faculties.Add(new Faculty(Convert.ToInt32(arr[0]), arr[1].ToString()));
 
                         if (faculties.Count == 0)
-                            message("Нет ниодного факультета. Добавьте данные");
-                        else
-                        {
-                            DataSourse = new BindingList<Faculty>(faculties);
-                        }
+                            info("Нет ниодного факультета. Добавьте данные");
+                        DataSourse = new BindingList<Faculty>(faculties);
                     }
                     else
-                        message($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
+                        info($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
 
                     return DataSourse;
                 });
@@ -81,11 +88,11 @@ namespace kTesterAdmin.Controller
             return task;
         }
 
-        internal Task<bool> DeleteFacultyAsync(int id)
+        internal Task<bool> DeleteFacultyAsync()
         {
             serverParametr = serverParametrsDict["deleteFaculty"];
             queryParametrsDict.Clear();
-            queryParametrsDict.Add("@id", id.ToString());
+            queryParametrsDict.Add("@id", CurrentFaculty.Id.ToString());
 
             var task = new Task<bool>(
                 () => {
@@ -96,60 +103,60 @@ namespace kTesterAdmin.Controller
                         return false;
                     }
                     else
-                    {
-                        message("Удалено");
                         return true;
-                    }
                 });
             task.Start();
             return task;
         }
 
-        internal Task<int> AddFacultyAsync(string name)
+        internal Task<bool> AddFacultyAsync(string name)
         {
+            CurrentFaculty.Name = name;
             serverParametr = serverParametrsDict["addFaculty"];
             queryParametrsDict.Clear();
-            queryParametrsDict.Add("@name", name);
+            queryParametrsDict.Add("@name", CurrentFaculty.Name);
 
-            var task = new Task<int>(
+            var task = new Task<bool>(
                 () => {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     if (result.Item1)
                     {
                         int id = JsonConvert.DeserializeObject<int>(result.Item2);
-
                         if (id == 0)
                             message("Такой факультет уже существует");
-                        return id;
+                        return id > 0;
                     }
                     else
                         message($"Ошибка добавления факультета:\r\n{result.Item2}\r\nОбратитесь к администратору");
-                    return -1;
+                    return false;
                 });
             task.Start();
             return task;
         }
 
-        internal Task<bool> EditFacultyAsync(string id, string name)
+        internal Task<bool> EditFacultyAsync(string name)
         {
+            CurrentFaculty.Name = name;
             serverParametr = serverParametrsDict["editFaculty"];
             queryParametrsDict.Clear();
-            queryParametrsDict.Add("@id", id);
-            queryParametrsDict.Add("@name", name);
+            queryParametrsDict.Add("@id", CurrentFaculty.Id.ToString());
+            queryParametrsDict.Add("@name", CurrentFaculty.Name);
 
             var task = new Task<bool>(
                 () => {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
-                    if (!result.Item1)
+                    if (result.Item1)
                     {
-                        message($"Ошибка редактирования факультета:\r\n{result.Item2}\r\nОбратитесь к администратору");
-                        return false;
+                        if (result.Item2 == "IsExist")
+                            message("Такой факультет уже существует!");
+                        else
+                            return true;
                     }
                     else
                     {
-                        message("Факультет отредактирован");
-                        return true;
+                        message($"Ошибка редактирования факультета:\r\n{result.Item2}\r\nОбратитесь к администратору");
                     }
+                    return false;
                 });
             task.Start();
             return task;

@@ -5,6 +5,7 @@ using kTesterLib.Service;
 using System.Data.SqlClient;
 using kTesterLib.Meta;
 using System.Linq;
+using System.Data;
 
 namespace kTesterServer
 {
@@ -16,18 +17,21 @@ namespace kTesterServer
         {
             { "USER_AUTH", "sp_UserAuth" },
             { "FAC_GET", "sp_FacultiesGet"},
-            { "FAC_GET_ONE", "sp_FacultyGetById"},
             { "FAC_ADD", "sp_FacultyAdd"},
             { "FAC_DLT", "sp_FacultyDlt"},
             { "FAC_EDT", "sp_FacultyEdt"},
-            { "FAC_EXST",  "sp_FacultyExist"}
+        };
 
+        static Dictionary<string, string> existStorageProcedures = new Dictionary<string, string>()
+        {
+            { "FAC_EDT", "sp_FacultyExist"},
+            { "FAC_ADD",  "sp_FacultyExist"}
         };
 
         #region Проверка на существование записи в таблице
         private static bool IsExist(Dictionary<string, string> searchParametrs, string serverParametr, SqlConnection connection)
         {
-            SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+            SqlCommand command = new SqlCommand(existStorageProcedures[serverParametr], connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             foreach (KeyValuePair<string, string> parametr in searchParametrs)
             {
@@ -110,12 +114,16 @@ namespace kTesterServer
             }
         }
 
-        internal static bool DefaultEditQuery(Dictionary<string, string> dict, string serverParametr)
+        internal static bool? DefaultEditQuery(Dictionary<string, string> dict, string serverParametr)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {
                 connection.Open();
+
+                if (IsExist(dict, serverParametr, connection))
+                    return null;
+
                 SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -171,13 +179,13 @@ namespace kTesterServer
             }
         }
 
-        internal static int AddFaculty(Dictionary<string, string> dict, string serverParametr)
+        internal static int DefaultAddQuery(Dictionary<string, string> dict, string serverParametr)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {
                 connection.Open();
-                if (!IsExist(dict, "FAC_EXST", connection))
+                if (!IsExist(dict, serverParametr, connection))
                 {
                     SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -187,13 +195,15 @@ namespace kTesterServer
                         SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
                         command.Parameters.Add(sqlParametr);
                     }
-                    SqlParameter outputSqlParametr = new SqlParameter()
+
+                    SqlParameter IdParametr = new SqlParameter
                     {
                         ParameterName = "@id",
-                        SqlDbType = System.Data.SqlDbType.Int,
-                        Direction = System.Data.ParameterDirection.Output
+                        SqlDbType = SqlDbType.Int
                     };
-                    command.Parameters.Add(outputSqlParametr);
+                    IdParametr.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(IdParametr);
+
                     command.ExecuteNonQuery();
                     return (int)command.Parameters["@id"].Value;
                 }

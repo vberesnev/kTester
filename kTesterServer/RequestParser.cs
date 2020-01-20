@@ -71,8 +71,7 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_ADD": //добавить факультет
-                    
-                    int id = DataBase.AddFaculty(dict, serverParametr);
+                    int id = DataBase.DefaultAddQuery(dict, serverParametr);
                     if (id >= 0)
                     {
                         isSuccess = true;
@@ -88,8 +87,13 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_EDT": //удалить факультет
-                    bool resultEdt = DataBase.DefaultEditQuery(dict, serverParametr);
-                    if (resultEdt)
+                    bool? resultEdt = DataBase.DefaultEditQuery(dict, serverParametr);
+                    if (resultEdt == null)
+                    {
+                        isSuccess = true;
+                        response = "IsExist";
+                    }
+                    if (resultEdt == true)
                     {
                         isSuccess = true;
                         response = "Success";

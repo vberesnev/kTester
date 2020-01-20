@@ -28,21 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.catalogs_metroTile = new MetroFramework.Controls.MetroTile();
             this.logs_metroTile = new MetroFramework.Controls.MetroTile();
             this.tests_metroTile = new MetroFramework.Controls.MetroTile();
             this.users_metroTile = new MetroFramework.Controls.MetroTile();
+            this.catalogs_metroTile = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
-            // 
-            // catalogs_metroTile
-            // 
-            this.catalogs_metroTile.ActiveControl = null;
-            this.catalogs_metroTile.Location = new System.Drawing.Point(3, 215);
-            this.catalogs_metroTile.Name = "catalogs_metroTile";
-            this.catalogs_metroTile.Size = new System.Drawing.Size(105, 100);
-            this.catalogs_metroTile.TabIndex = 1;
-            this.catalogs_metroTile.Text = "Справочники";
-            this.catalogs_metroTile.UseSelectable = true;
             // 
             // logs_metroTile
             // 
@@ -73,6 +63,19 @@
             this.users_metroTile.TabIndex = 4;
             this.users_metroTile.Text = "Пользователи";
             this.users_metroTile.UseSelectable = true;
+            // 
+            // catalogs_metroTile
+            // 
+            this.catalogs_metroTile.ActiveControl = null;
+            this.catalogs_metroTile.Location = new System.Drawing.Point(3, 215);
+            this.catalogs_metroTile.Name = "catalogs_metroTile";
+            this.catalogs_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.catalogs_metroTile.TabIndex = 1;
+            this.catalogs_metroTile.Text = "Справочники";
+            this.catalogs_metroTile.TileImage = global::kTesterAdmin.Properties.Resources.book_white_mini;
+            this.catalogs_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.catalogs_metroTile.UseSelectable = true;
+            this.catalogs_metroTile.UseTileImage = true;
             // 
             // AdminMenu
             // 

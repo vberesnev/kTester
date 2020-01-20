@@ -12,7 +12,7 @@ namespace kTesterAdmin.Controller
     public class AuthController
     {
         [JsonRequired]
-        private string serverParametr; 
+        private string serverParametr = ""; 
         [JsonRequired]
         private User currentUser;
         

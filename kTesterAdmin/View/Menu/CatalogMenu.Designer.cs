@@ -84,7 +84,9 @@
             this.back_metroTile.Style = MetroFramework.MetroColorStyle.Orange;
             this.back_metroTile.TabIndex = 4;
             this.back_metroTile.Text = "Назад";
+            this.back_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.back_metroTile.UseSelectable = true;
+            this.back_metroTile.UseTileImage = true;
             // 
             // CatalogMenu
             // 

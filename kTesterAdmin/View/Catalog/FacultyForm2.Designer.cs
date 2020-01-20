@@ -170,7 +170,7 @@
             // 
             this.addFaculty_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.addFaculty_button.BackColor = System.Drawing.Color.Transparent;
-            this.addFaculty_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.blue_plus;
+
             this.addFaculty_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.addFaculty_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addFaculty_button.FlatAppearance.BorderSize = 0;

@@ -52,6 +52,7 @@
             this.content_metroPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.content_metroPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.content_metroPanel.HorizontalScrollbarBarColor = true;
             this.content_metroPanel.HorizontalScrollbarHighlightOnWheel = false;
             this.content_metroPanel.HorizontalScrollbarSize = 10;

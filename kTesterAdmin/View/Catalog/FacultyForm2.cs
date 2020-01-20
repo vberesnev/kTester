@@ -20,7 +20,7 @@ namespace kTesterAdmin.View.Catalog
         {
             InitializeComponent();
             message = new Action<string> ((x) => BeginInvoke( new Action(() => info_label.Text = x)));
-            facultyController = new FacultyController(message, userName);
+            //facultyController = new FacultyController(message, userName);
         }
 
         private void FacultyForm_Load(object sender, EventArgs e)
@@ -72,11 +72,11 @@ namespace kTesterAdmin.View.Catalog
 
         private void DeleteFaculty(int id, int row)
         {
-            message("Удаление факультета . . .");
-            if (facultyController.DeleteFacultyAsync(id).Result)
-            {
-                GetDataSource();
-            }
+            //message("Удаление факультета . . .");
+            //if (facultyController.DeleteFacultyAsync(id).Result)
+            //{
+            //    GetDataSource();
+            //}
         }
 
         private void faculties_dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -116,28 +116,28 @@ namespace kTesterAdmin.View.Catalog
 
         private async void save_button_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(name_textBox.Text))
-            {
-                name_textBox.BackColor = System.Drawing.Color.LightCoral;
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(name_textBox.Text))
+            //{
+            //    name_textBox.BackColor = System.Drawing.Color.LightCoral;
+            //    return;
+            //}
 
-            int id = 0;
-            if (Int32.TryParse(id_textBox.Text, out id))
-            {
-                if (id == 0)
-                {
-                    if (await facultyController.AddFacultyAsync(name_textBox.Text) > 0)
-                        GetDataSource();
-                }
-                else
-                {
-                    if (await facultyController.EditFacultyAsync(id_textBox.Text, name_textBox.Text))
-                        GetDataSource();
-                } 
-            }
-            else
-                message("Ошибка сохранения данных, введен строчный идентификатор\r\nОбратитесь к администратору");
+            //int id = 0;
+            //if (Int32.TryParse(id_textBox.Text, out id))
+            //{
+            //    if (id == 0)
+            //    {
+            //        if (await facultyController.AddFacultyAsync(name_textBox.Text) > 0)
+            //            GetDataSource();
+            //    }
+            //    else
+            //    {
+            //        if (await facultyController.EditFacultyAsync(id_textBox.Text, name_textBox.Text))
+            //            GetDataSource();
+            //    } 
+            //}
+            //else
+            //    message("Ошибка сохранения данных, введен строчный идентификатор\r\nОбратитесь к администратору");
 
             addFaculty_button.Visible = true;
             faculty_panel.Visible = false;

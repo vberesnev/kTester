@@ -63,9 +63,9 @@ namespace kTesterAdmin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap blue_plus {
+        internal static System.Drawing.Bitmap book_white_mini {
             get {
-                object obj = ResourceManager.GetObject("blue_plus", resourceCulture);
+                object obj = ResourceManager.GetObject("book_white_mini", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,6 +83,16 @@ namespace kTesterAdmin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete_white_mini {
+            get {
+                object obj = ResourceManager.GetObject("delete_white_mini", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit {
             get {
                 object obj = ResourceManager.GetObject("edit", resourceCulture);
@@ -93,9 +103,29 @@ namespace kTesterAdmin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap edit_white_mini {
+            get {
+                object obj = ResourceManager.GetObject("edit_white_mini", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus_white_mini {
+            get {
+                object obj = ResourceManager.GetObject("plus_white_mini", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

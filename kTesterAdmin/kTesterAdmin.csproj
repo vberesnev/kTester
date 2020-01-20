@@ -64,6 +64,11 @@
     <Compile Include="Controller\RequestSender.cs" />
     <Compile Include="Controller\SettingsController.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\AuthForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +88,12 @@
     </Compile>
     <Compile Include="View\Catalog\FacultyForm2.Designer.cs">
       <DependentUpon>FacultyForm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Catalog\FacultySingleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Catalog\FacultySingleForm.Designer.cs">
+      <DependentUpon>FacultySingleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
@@ -120,19 +131,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="View\Catalog\FacultyForm.resx">
       <DependentUpon>FacultyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Catalog\FacultyForm2.resx">
       <DependentUpon>FacultyForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Catalog\FacultySingleForm.resx">
+      <DependentUpon>FacultySingleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -187,6 +196,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\book_white_mini.png" />
+    <None Include="Resources\back_white_mini.png" />
+    <None Include="Resources\delete_white_mini.png" />
+    <None Include="Resources\edit_white_mini.png" />
+    <None Include="Resources\plus_white_mini.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

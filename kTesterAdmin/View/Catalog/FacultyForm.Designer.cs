@@ -1,4 +1,6 @@
-﻿namespace kTesterAdmin.View.Catalog
+﻿using System.Drawing;
+
+namespace kTesterAdmin.View.Catalog
 {
     partial class FacultyForm
     {
@@ -32,49 +34,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.add_metroTile = new MetroFramework.Controls.MetroTile();
-            this.edit_metroTile = new MetroFramework.Controls.MetroTile();
-            this.delete_metroTile = new MetroFramework.Controls.MetroTile();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FacultyForm));
             this.faculties_metroGrid = new MetroFramework.Controls.MetroGrid();
-            this.info_metroLabel = new MetroFramework.Controls.MetroLabel();
+            this.info_textBox = new System.Windows.Forms.TextBox();
+            this.delete_metroTile = new MetroFramework.Controls.MetroTile();
+            this.edit_metroTile = new MetroFramework.Controls.MetroTile();
+            this.add_metroTile = new MetroFramework.Controls.MetroTile();
             this.facultyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.faculties_metroGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.facultyBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // add_metroTile
-            // 
-            this.add_metroTile.ActiveControl = null;
-            this.add_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.add_metroTile.Location = new System.Drawing.Point(254, 3);
-            this.add_metroTile.Name = "add_metroTile";
-            this.add_metroTile.Size = new System.Drawing.Size(105, 100);
-            this.add_metroTile.TabIndex = 4;
-            this.add_metroTile.Text = "Добавить";
-            this.add_metroTile.UseSelectable = true;
-            // 
-            // edit_metroTile
-            // 
-            this.edit_metroTile.ActiveControl = null;
-            this.edit_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.edit_metroTile.Location = new System.Drawing.Point(365, 3);
-            this.edit_metroTile.Name = "edit_metroTile";
-            this.edit_metroTile.Size = new System.Drawing.Size(105, 100);
-            this.edit_metroTile.TabIndex = 4;
-            this.edit_metroTile.Text = "Править";
-            this.edit_metroTile.UseSelectable = true;
-            // 
-            // delete_metroTile
-            // 
-            this.delete_metroTile.ActiveControl = null;
-            this.delete_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.delete_metroTile.Location = new System.Drawing.Point(476, 3);
-            this.delete_metroTile.Name = "delete_metroTile";
-            this.delete_metroTile.Size = new System.Drawing.Size(105, 100);
-            this.delete_metroTile.Style = MetroFramework.MetroColorStyle.Red;
-            this.delete_metroTile.TabIndex = 4;
-            this.delete_metroTile.Text = "Удалить";
-            this.delete_metroTile.UseSelectable = true;
             // 
             // faculties_metroGrid
             // 
@@ -109,7 +78,8 @@
             this.faculties_metroGrid.EnableHeadersVisualStyles = false;
             this.faculties_metroGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.faculties_metroGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.faculties_metroGrid.Location = new System.Drawing.Point(22, 120);
+            this.faculties_metroGrid.Location = new System.Drawing.Point(12, 119);
+            this.faculties_metroGrid.MultiSelect = false;
             this.faculties_metroGrid.Name = "faculties_metroGrid";
             this.faculties_metroGrid.ReadOnly = true;
             this.faculties_metroGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -124,19 +94,70 @@
             this.faculties_metroGrid.RowHeadersVisible = false;
             this.faculties_metroGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.faculties_metroGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.faculties_metroGrid.Size = new System.Drawing.Size(559, 384);
+            this.faculties_metroGrid.Size = new System.Drawing.Size(559, 455);
             this.faculties_metroGrid.TabIndex = 5;
             // 
-            // info_metroLabel
+            // info_textBox
             // 
-            this.info_metroLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.info_textBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.info_metroLabel.AutoSize = true;
-            this.info_metroLabel.Location = new System.Drawing.Point(22, 544);
-            this.info_metroLabel.Name = "info_metroLabel";
-            this.info_metroLabel.Size = new System.Drawing.Size(81, 19);
-            this.info_metroLabel.TabIndex = 6;
-            this.info_metroLabel.Text = "metroLabel1";
+            this.info_textBox.BackColor = System.Drawing.Color.White;
+            this.info_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.info_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.info_textBox.Location = new System.Drawing.Point(27, 185);
+            this.info_textBox.Multiline = true;
+            this.info_textBox.Name = "info_textBox";
+            this.info_textBox.ReadOnly = true;
+            this.info_textBox.Size = new System.Drawing.Size(524, 347);
+            this.info_textBox.TabIndex = 7;
+            this.info_textBox.TabStop = false;
+            this.info_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // delete_metroTile
+            // 
+            this.delete_metroTile.ActiveControl = null;
+            this.delete_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.delete_metroTile.Location = new System.Drawing.Point(476, 3);
+            this.delete_metroTile.Name = "delete_metroTile";
+            this.delete_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.delete_metroTile.Style = MetroFramework.MetroColorStyle.Red;
+            this.delete_metroTile.TabIndex = 4;
+            this.delete_metroTile.Text = "Удалить";
+            this.delete_metroTile.TileImage = global::kTesterAdmin.Properties.Resources.delete_white_mini;
+            this.delete_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.delete_metroTile.UseSelectable = true;
+            this.delete_metroTile.UseTileImage = true;
+            this.delete_metroTile.Click += new System.EventHandler(this.delete_metroTile_Click);
+            // 
+            // edit_metroTile
+            // 
+            this.edit_metroTile.ActiveControl = null;
+            this.edit_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.edit_metroTile.Location = new System.Drawing.Point(365, 3);
+            this.edit_metroTile.Name = "edit_metroTile";
+            this.edit_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.edit_metroTile.TabIndex = 4;
+            this.edit_metroTile.Text = "Править";
+            this.edit_metroTile.TileImage = global::kTesterAdmin.Properties.Resources.edit_white_mini;
+            this.edit_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.edit_metroTile.UseSelectable = true;
+            this.edit_metroTile.UseTileImage = true;
+            this.edit_metroTile.Click += new System.EventHandler(this.edit_metroTile_Click);
+            // 
+            // add_metroTile
+            // 
+            this.add_metroTile.ActiveControl = null;
+            this.add_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.add_metroTile.Location = new System.Drawing.Point(254, 3);
+            this.add_metroTile.Name = "add_metroTile";
+            this.add_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.add_metroTile.TabIndex = 4;
+            this.add_metroTile.Text = "Добавить";
+            this.add_metroTile.TileImage = ((System.Drawing.Image)(resources.GetObject("add_metroTile.TileImage")));
+            this.add_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.add_metroTile.UseSelectable = true;
+            this.add_metroTile.UseTileImage = true;
+            this.add_metroTile.Click += new System.EventHandler(this.add_metroTile_Click);
             // 
             // facultyBindingSource
             // 
@@ -146,13 +167,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.info_metroLabel);
+            this.Controls.Add(this.info_textBox);
             this.Controls.Add(this.faculties_metroGrid);
             this.Controls.Add(this.delete_metroTile);
             this.Controls.Add(this.edit_metroTile);
             this.Controls.Add(this.add_metroTile);
             this.Name = "FacultyForm";
-            this.Size = new System.Drawing.Size(584, 587);
+            this.Size = new System.Drawing.Size(584, 592);
             this.Load += new System.EventHandler(this.FacultyForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.faculties_metroGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.facultyBindingSource)).EndInit();
@@ -167,7 +188,7 @@
         public MetroFramework.Controls.MetroTile edit_metroTile;
         public MetroFramework.Controls.MetroTile delete_metroTile;
         private MetroFramework.Controls.MetroGrid faculties_metroGrid;
-        private MetroFramework.Controls.MetroLabel info_metroLabel;
         private System.Windows.Forms.BindingSource facultyBindingSource;
+        private System.Windows.Forms.TextBox info_textBox;
     }
 }
