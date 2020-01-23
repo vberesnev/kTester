@@ -15,27 +15,22 @@ namespace kTesterAdmin.Controller
         private string serverParametr = ""; 
         [JsonRequired]
         private User currentUser;
+        public User GetUser()
+        {
+            return currentUser;
+        }
         
         public AuthController() 
         {
             serverParametr = "USER_AUTH";
         }
 
-        public string UserName
+        public AuthController(int id, string name, string pass, int rights)
         {
-            get
-            {
-                if (currentUser != null)
-                    return currentUser.Login;
-                return null;
-            }
-            set 
-            {
-                if (currentUser == null)
-                    currentUser = new User();
-                currentUser.Login = value;
-            } //удалить сеттер после окончания разработки
+            currentUser = new User(id, name, pass, rights);
         }
+
+        
 
         public Task<Tuple<bool, string>> AuthAsync(string login, string password)
         {

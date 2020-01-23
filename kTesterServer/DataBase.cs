@@ -16,10 +16,14 @@ namespace kTesterServer
         static Dictionary<string, string> storageProcedures = new Dictionary<string, string>()
         {
             { "USER_AUTH", "sp_UserAuth" },
+            { "LOG_ADD", "sp_LogAdd" },
             { "FAC_GET", "sp_FacultiesGet"},
             { "FAC_ADD", "sp_FacultyAdd"},
             { "FAC_DLT", "sp_FacultyDlt"},
             { "FAC_EDT", "sp_FacultyEdt"},
+            { "LOG_DAT", "sp_LogsByDate"},
+            { "LOG_USR", "sp_LogsByUser"},
+            { "LOG_TXT", "sp_LogsByText"},
         };
 
         static Dictionary<string, string> existStorageProcedures = new Dictionary<string, string>()
@@ -27,6 +31,30 @@ namespace kTesterServer
             { "FAC_EDT", "sp_FacultyExist"},
             { "FAC_ADD",  "sp_FacultyExist"}
         };
+
+        internal static void CreateLog(User user,  string text)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(storageProcedures["LOG_ADD"], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlParameter idP = new SqlParameter() { ParameterName = "@id", Value = user.Id };
+                command.Parameters.Add(idP);
+                SqlParameter textP = new SqlParameter() { ParameterName = "@text", Value = text };
+                command.Parameters.Add(textP);
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                ServerLog.Log($"ОШИБКА логирования действий пользователя {user.Login}: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
         #region Проверка на существование записи в таблице
         private static bool IsExist(Dictionary<string, string> searchParametrs, string serverParametr, SqlConnection connection)
@@ -68,7 +96,6 @@ namespace kTesterServer
                 }
                 else 
                 {
-                    ServerLog.Log($"Неудачная попытка авторизоваться пользователя {user.Login} с паролем {user.Password}. Введенные данные в базе отсутсвуют");
                     return user;
                 }
             }
@@ -82,9 +109,11 @@ namespace kTesterServer
                 connection.Close();
             }
         }
+
+        
         #endregion
 
-        internal static bool DefaultDeleteQuery(Dictionary<string, string> dict, string serverParametr)
+        internal static bool DefaultDeleteQuery(Dictionary<string, string> dict, string serverParametr, User user)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             try
@@ -114,7 +143,7 @@ namespace kTesterServer
             }
         }
 
-        internal static bool? DefaultEditQuery(Dictionary<string, string> dict, string serverParametr)
+        internal static bool? DefaultEditQuery(Dictionary<string, string> dict, string serverParametr, User user)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             try
@@ -148,8 +177,7 @@ namespace kTesterServer
             }
         }
 
-        #region Запросы к таблице факультетов FACULTIES
-        internal static List<object[]> DefaultSelectQuery(string serverParametr)
+        internal static List<object[]> DefaultSelectQuery(string serverParametr, User user)
         {
             List<object[]> list = new List<object[]>();
             SqlConnection connection = new SqlConnection(connectionString);
@@ -166,7 +194,7 @@ namespace kTesterServer
                     int fieldCount = result.GetValues(values);
                     list.Add(values);
                 }
-                return list ;
+                return list;
             }
             catch (SqlException ex)
             {
@@ -179,7 +207,44 @@ namespace kTesterServer
             }
         }
 
-        internal static int DefaultAddQuery(Dictionary<string, string> dict, string serverParametr)
+        internal static List<object[]> ParamSelectQuery(Dictionary<string, string> dict, string serverParametr, User currentUser)
+        {
+            List<object[]> list = new List<object[]>();
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                foreach (KeyValuePair<string, string> parametr in dict)
+                {
+                    SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                    command.Parameters.Add(sqlParametr);
+                }
+
+                var result = command.ExecuteReader();
+                while (result.Read())
+                {
+                    object[] values = new Object[result.FieldCount];
+                    int fieldCount = result.GetValues(values);
+                    list.Add(values);
+                }
+                return list;
+            }
+            catch (SqlException ex)
+            {
+                ServerLog.Log($"ОШИБКА выборки данных, хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        internal static int DefaultAddQuery(Dictionary<string, string> dict, string serverParametr, User user)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             try
@@ -213,6 +278,8 @@ namespace kTesterServer
             {
                 ServerLog.Log($"ОШИБКА добавления данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
                                $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                ServerLog.BaseLog(user, $"ОШИБКА добавления данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
+                               $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
                 return -1;
             }
             finally
@@ -220,7 +287,6 @@ namespace kTesterServer
                 connection.Close();
             }
         }
-        #endregion
 
 
         

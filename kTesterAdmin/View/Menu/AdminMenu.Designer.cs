@@ -28,21 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.logs_metroTile = new MetroFramework.Controls.MetroTile();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminMenu));
             this.tests_metroTile = new MetroFramework.Controls.MetroTile();
-            this.users_metroTile = new MetroFramework.Controls.MetroTile();
             this.catalogs_metroTile = new MetroFramework.Controls.MetroTile();
+            this.logs_metroTile = new MetroFramework.Controls.MetroTile();
+            this.users_metroTile = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
-            // 
-            // logs_metroTile
-            // 
-            this.logs_metroTile.ActiveControl = null;
-            this.logs_metroTile.Location = new System.Drawing.Point(3, 321);
-            this.logs_metroTile.Name = "logs_metroTile";
-            this.logs_metroTile.Size = new System.Drawing.Size(105, 100);
-            this.logs_metroTile.TabIndex = 2;
-            this.logs_metroTile.Text = "Логи";
-            this.logs_metroTile.UseSelectable = true;
             // 
             // tests_metroTile
             // 
@@ -52,17 +43,10 @@
             this.tests_metroTile.Size = new System.Drawing.Size(105, 100);
             this.tests_metroTile.TabIndex = 3;
             this.tests_metroTile.Text = "Тесты";
+            this.tests_metroTile.TileImage = global::kTesterAdmin.Properties.Resources.test_white_mini;
+            this.tests_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.tests_metroTile.UseSelectable = true;
-            // 
-            // users_metroTile
-            // 
-            this.users_metroTile.ActiveControl = null;
-            this.users_metroTile.Location = new System.Drawing.Point(3, 109);
-            this.users_metroTile.Name = "users_metroTile";
-            this.users_metroTile.Size = new System.Drawing.Size(105, 100);
-            this.users_metroTile.TabIndex = 4;
-            this.users_metroTile.Text = "Пользователи";
-            this.users_metroTile.UseSelectable = true;
+            this.tests_metroTile.UseTileImage = true;
             // 
             // catalogs_metroTile
             // 
@@ -76,6 +60,32 @@
             this.catalogs_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.catalogs_metroTile.UseSelectable = true;
             this.catalogs_metroTile.UseTileImage = true;
+            // 
+            // logs_metroTile
+            // 
+            this.logs_metroTile.ActiveControl = null;
+            this.logs_metroTile.Location = new System.Drawing.Point(3, 321);
+            this.logs_metroTile.Name = "logs_metroTile";
+            this.logs_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.logs_metroTile.TabIndex = 2;
+            this.logs_metroTile.Text = "Логи";
+            this.logs_metroTile.TileImage = ((System.Drawing.Image)(resources.GetObject("logs_metroTile.TileImage")));
+            this.logs_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.logs_metroTile.UseSelectable = true;
+            this.logs_metroTile.UseTileImage = true;
+            // 
+            // users_metroTile
+            // 
+            this.users_metroTile.ActiveControl = null;
+            this.users_metroTile.Location = new System.Drawing.Point(3, 109);
+            this.users_metroTile.Name = "users_metroTile";
+            this.users_metroTile.Size = new System.Drawing.Size(105, 100);
+            this.users_metroTile.TabIndex = 4;
+            this.users_metroTile.Text = "Пользователи";
+            this.users_metroTile.TileImage = global::kTesterAdmin.Properties.Resources.user_white_mini;
+            this.users_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.users_metroTile.UseSelectable = true;
+            this.users_metroTile.UseTileImage = true;
             // 
             // AdminMenu
             // 

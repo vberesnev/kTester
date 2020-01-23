@@ -30,7 +30,7 @@ namespace kTesterAdmin
                 Tuple<bool, string> result = await authController.AuthAsync(login_textBox.Text, password_textBox.Text);
                 if (result.Item1)
                 {
-                    MainForm2 mainForm = new MainForm2(authController);
+                    MainForm mainForm = new MainForm(authController);
                     this.Hide();
                     mainForm.ShowDialog();
                     this.Show();

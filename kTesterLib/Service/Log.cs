@@ -12,9 +12,18 @@ namespace kTesterLib.Service
     public class Log
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        private int UserId { get; set; }
         public User User { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
         public string Text { get; set; }
+
+        public Log(int id, DateTime date, string text, int userId, string user)
+        {
+            Id = id;
+            Date = date;
+            Text = text;
+            UserId = userId;
+            User = new User(userId, user);
+        }
     }
 }

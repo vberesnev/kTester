@@ -20,7 +20,10 @@ namespace kTesterServer
             { "FAC_GET", "загрузил список факультетов"},
             { "FAC_ADD", "добавил новый факультет"},
             { "FAC_DLT", "удалил факультет"},
-            { "FAC_EDT", "отредактировал факультет"}
+            { "FAC_EDT", "отредактировал факультет"},
+            { "LOG_DAT", "загрузил логи"},
+            { "LOG_USR", "загрузил логи"},
+            { "LOG_TXT", "загрузил логи"}
         };
 
         public RequestParser(string request)
@@ -42,7 +45,7 @@ namespace kTesterServer
 
             dynamic json = JObject.Parse(requestBody);
             string serverParametr = json.serverParametr;
-            string userLogin = json.userParametr;
+            User currentUser = new User((int)json["currentUser"]["Id"], (string)json["currentUser"]["Login"], (string)json["currentUser"]["Password"], (int)json["currentUser"]["UserRights"]);
 
             dynamic dictJson = json.queryParametrsDict;
             string dictStr = Convert.ToString(dictJson);
@@ -54,24 +57,34 @@ namespace kTesterServer
             switch (serverParametr)
             {
                 case "USER_AUTH": //Авторизация
-                    User user = new User((string)json["currentUser"]["Login"],(string)json["currentUser"]["Password"]);
-                    User responseUser = DataBase.GetUser(user, serverParametr);
-                    if (responseUser != null)
+                    //User user = new User((string)json["currentUser"]["Login"],(string)json["currentUser"]["Password"]);
+                    currentUser = DataBase.GetUser(currentUser, serverParametr);
+                    if (currentUser != null)
                     {
                         isSuccess = true;
-                        response = JsonConvert.SerializeObject(responseUser);
+                        response = JsonConvert.SerializeObject(currentUser);
                     }
                     break;
                 case "FAC_GET": //Список всех факультетов
-                    List<object[]> list = DataBase.DefaultSelectQuery(serverParametr);
+                    List<object[]> list = DataBase.DefaultSelectQuery(serverParametr, currentUser);
                     if (list != null)
                     {
                         isSuccess = true;
                         response = JsonConvert.SerializeObject(list);
                     }
                     break;
+                case "LOG_DAT":
+                case "LOG_USR":
+                case "LOG_TXT":
+                    List<object[]> paramList = DataBase.ParamSelectQuery(dict, serverParametr, currentUser);
+                    if (paramList != null)
+                    {
+                        isSuccess = true;
+                        response = JsonConvert.SerializeObject(paramList);
+                    }
+                    break;
                 case "FAC_ADD": //добавить факультет
-                    int id = DataBase.DefaultAddQuery(dict, serverParametr);
+                    int id = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
                     if (id >= 0)
                     {
                         isSuccess = true;
@@ -79,7 +92,7 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_DLT": //удалить факультет
-                    bool resultDlt = DataBase.DefaultDeleteQuery(dict, serverParametr);
+                    bool resultDlt = DataBase.DefaultDeleteQuery(dict, serverParametr, currentUser);
                     if (resultDlt)
                     {
                         isSuccess = true;
@@ -87,7 +100,7 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_EDT": //удалить факультет
-                    bool? resultEdt = DataBase.DefaultEditQuery(dict, serverParametr);
+                    bool? resultEdt = DataBase.DefaultEditQuery(dict, serverParametr, currentUser);
                     if (resultEdt == null)
                     {
                         isSuccess = true;
@@ -103,18 +116,24 @@ namespace kTesterServer
                 default: //неизвестный параметр
                     response = "Unknown";
                     isSuccess = true;
-                    ServerLog.Log($"Пользователь {userLogin} отправил неопознаные данные: {requestBody}");
+                    ServerLog.Log($"Пользователь {currentUser.Login} отправил неопознаные данные: {requestBody}");
                     break;
             }
             if (isSuccess)
             {
                 if (dict.Count > 0)
-                    ServerLog.Log($"Пользователь {userLogin} {logParams[serverParametr]} " +
-                                  $"c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                {
+                    //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]} " +
+                     //             $"c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                    ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]} c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                }
                 else
-                    ServerLog.Log($"Пользователь {userLogin} {logParams[serverParametr]}");
+                {
+                    //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]}");
+                    ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]}");
+                }
+                    
             }
-                
             else
                 response = "Exception";
             return response;

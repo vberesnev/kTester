@@ -17,7 +17,7 @@ namespace kTesterAdmin.View.Catalog
         private FacultyController facultyController;
         private Action<string> message;
         private Action<string> info;
-        public FacultyForm(string userName)
+        public FacultyForm(AuthController userController)
         {
             
             info = new Action<string>((x) => BeginInvoke(new Action(() => info_textBox.Text = x)));
@@ -27,7 +27,7 @@ namespace kTesterAdmin.View.Catalog
                     "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             })));
 
-            facultyController = new FacultyController(info, message, userName);
+            facultyController = new FacultyController(info, message, userController);
             InitializeComponent();
         }
 

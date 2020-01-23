@@ -18,15 +18,15 @@ namespace kTesterAdmin.View
 {
     public partial class MainForm : MetroForm
     {
-        private AuthController authController;
+        private AuthController userInfo;
         private UserEventArgs userEventArgs;
 
         public MainForm(AuthController authController)
         {
             InitializeComponent();
-            this.authController = authController;
+            this.userInfo = authController;
             this.MinimumSize = new Size(650, 400);
-            userEventArgs = new UserEventArgs(0, authController.UserName);
+            OpenAdminMenu(this, null);
         }
 
         //Удалить после окончания разработки
@@ -34,9 +34,9 @@ namespace kTesterAdmin.View
         {
             InitializeComponent();
 
-            authController = new AuthController();
-            userEventArgs = new UserEventArgs(0, "admin");
-            OpenAdminMenu(this, userEventArgs);
+            userInfo = new AuthController(1, "admin", "admin", 1);
+            this.MinimumSize = new Size(650, 400);
+            OpenAdminMenu(this, null);
         }
 
         private void OpenAdminMenu(object sender, EventArgs e)
@@ -52,7 +52,10 @@ namespace kTesterAdmin.View
 
         private void OpenLogs(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LogsForm LF = new LogsForm(userInfo);
+            content_metroPanel.Controls.Clear();
+            content_metroPanel.Controls.Add(LF);
+            LF.Dock = DockStyle.Fill;
         }
 
         private void OpenUsers(object sender, EventArgs e)
@@ -94,8 +97,7 @@ namespace kTesterAdmin.View
 
         private void OpenFaculties(object sender, EventArgs e)
         {
-            var e1 = e as UserEventArgs;
-            FacultyForm FF = new FacultyForm("admin");
+            FacultyForm FF = new FacultyForm(userInfo);
             content_metroPanel.Controls.Clear();
             content_metroPanel.Controls.Add(FF);
             FF.Dock = DockStyle.Fill;

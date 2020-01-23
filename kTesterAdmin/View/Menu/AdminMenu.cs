@@ -18,9 +18,5 @@ namespace kTesterAdmin.View.Menu
             InitializeComponent();
         }
 
-        private void tests_metroTile_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -52,7 +52,7 @@
             this.faculty_metroTextBox.MaxLength = 32767;
             this.faculty_metroTextBox.Name = "faculty_metroTextBox";
             this.faculty_metroTextBox.PasswordChar = '\0';
-            this.faculty_metroTextBox.PromptText = "Факультет";
+            this.faculty_metroTextBox.WaterMark = "Факультет";
             this.faculty_metroTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.faculty_metroTextBox.SelectedText = "";
             this.faculty_metroTextBox.SelectionLength = 0;

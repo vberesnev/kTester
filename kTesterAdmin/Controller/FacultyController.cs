@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using kTesterLib.Meta;
+using kTesterLib.Service;
 using Newtonsoft.Json;
 
 namespace kTesterAdmin.Controller
@@ -15,7 +16,7 @@ namespace kTesterAdmin.Controller
         [JsonRequired]
         private string serverParametr;
         [JsonRequired]
-        private string userParametr;
+        private User currentUser;
 
         [JsonIgnore]
         public Faculty CurrentFaculty { get; private set; }
@@ -34,10 +35,10 @@ namespace kTesterAdmin.Controller
         private Action<string> info;
         private Action<string> message;
 
-        public FacultyController(Action<string> info, Action<string> mess, string userName)
+        public FacultyController(Action<string> info, Action<string> mess, AuthController userController)
         {
             faculties = new List<Faculty>();
-            userParametr = userName;
+            currentUser = userController.GetUser();
             serverParametrsDict = new Dictionary<string, string>()
             {
                 {"getFaculties", "FAC_GET" },
@@ -49,7 +50,6 @@ namespace kTesterAdmin.Controller
             queryParametrsDict = new Dictionary<string, string>();
             this.info = info;
             message = mess;
-
         }
 
         public void SetCurrentFaculty(int id=0)
@@ -62,8 +62,8 @@ namespace kTesterAdmin.Controller
 
         internal Task<BindingList<Faculty>> GetFacultiesAsync()
         {
-            
             serverParametr = serverParametrsDict["getFaculties"];
+            queryParametrsDict.Clear();
             var task = new Task<BindingList<Faculty>>(
                 () => {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));

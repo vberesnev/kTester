@@ -83,7 +83,7 @@
             // settings_button
             // 
             this.settings_button.BackColor = System.Drawing.Color.Transparent;
-            this.settings_button.BackgroundImage = global::kTesterAdmin.Properties.Resources.settings;
+
             this.settings_button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.settings_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.settings_button.FlatAppearance.BorderSize = 0;
