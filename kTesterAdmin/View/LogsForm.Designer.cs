@@ -33,6 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.logs_metroGrid = new MetroFramework.Controls.MetroGrid();
             this.info_textBox = new System.Windows.Forms.TextBox();
+            this.metroDateTime = new MetroFramework.Controls.MetroDateTime();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.logs_metroGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,23 +46,25 @@
             this.logs_metroGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.logs_metroGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.logs_metroGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.logs_metroGrid.BackgroundColor = System.Drawing.Color.White;
             this.logs_metroGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.logs_metroGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.logs_metroGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.logs_metroGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.logs_metroGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.logs_metroGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.logs_metroGrid.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
@@ -69,7 +73,7 @@
             this.logs_metroGrid.EnableHeadersVisualStyles = false;
             this.logs_metroGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.logs_metroGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.logs_metroGrid.Location = new System.Drawing.Point(13, 124);
+            this.logs_metroGrid.Location = new System.Drawing.Point(13, 71);
             this.logs_metroGrid.MultiSelect = false;
             this.logs_metroGrid.Name = "logs_metroGrid";
             this.logs_metroGrid.ReadOnly = true;
@@ -84,8 +88,9 @@
             this.logs_metroGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.logs_metroGrid.RowHeadersVisible = false;
             this.logs_metroGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.logs_metroGrid.RowTemplate.Height = 14;
             this.logs_metroGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.logs_metroGrid.Size = new System.Drawing.Size(559, 455);
+            this.logs_metroGrid.Size = new System.Drawing.Size(559, 508);
             this.logs_metroGrid.TabIndex = 6;
             // 
             // info_textBox
@@ -95,7 +100,7 @@
             this.info_textBox.BackColor = System.Drawing.Color.White;
             this.info_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.info_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.info_textBox.Location = new System.Drawing.Point(31, 174);
+            this.info_textBox.Location = new System.Drawing.Point(31, 106);
             this.info_textBox.Multiline = true;
             this.info_textBox.Name = "info_textBox";
             this.info_textBox.ReadOnly = true;
@@ -104,11 +109,33 @@
             this.info_textBox.TabStop = false;
             this.info_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // metroDateTime
+            // 
+            this.metroDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroDateTime.Location = new System.Drawing.Point(372, 15);
+            this.metroDateTime.MinimumSize = new System.Drawing.Size(0, 29);
+            this.metroDateTime.Name = "metroDateTime";
+            this.metroDateTime.Size = new System.Drawing.Size(200, 29);
+            this.metroDateTime.TabIndex = 9;
+            this.metroDateTime.ValueChanged += new System.EventHandler(this.metroDateTime_ValueChanged);
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(31, 15);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(75, 23);
+            this.metroButton1.TabIndex = 10;
+            this.metroButton1.Text = "metroButton1";
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
             // LogsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.metroDateTime);
             this.Controls.Add(this.info_textBox);
             this.Controls.Add(this.logs_metroGrid);
             this.Name = "LogsForm";
@@ -124,5 +151,7 @@
 
         private MetroFramework.Controls.MetroGrid logs_metroGrid;
         private System.Windows.Forms.TextBox info_textBox;
+        private MetroFramework.Controls.MetroDateTime metroDateTime;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

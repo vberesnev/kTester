@@ -53,6 +53,7 @@ namespace kTesterAdmin.View.Catalog
             this.faculties_metroGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.faculties_metroGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.faculties_metroGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.faculties_metroGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.faculties_metroGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;

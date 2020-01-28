@@ -85,5 +85,26 @@ namespace kTesterAdmin.Controller
                     return DataSourse;
                 });
         }
+
+
+
+
+        internal Task<BindingList<Log>> GetLogsByFilterAsync(string paramert)
+        {
+            var task =  new Task<BindingList<Log>>(
+                () =>
+                {
+                    DataSourse = null;
+                    var filterLogs = logs.Where(u => u.Text.Contains("фак"));
+                    if (filterLogs as List<Log> != null)
+                        DataSourse = new BindingList<Log>(filterLogs as List<Log>);
+                    else
+                        info("Нет ниодного лога");
+                    return DataSourse;
+                
+                });
+            task.Start();
+            return task;
+        }
     }
 }

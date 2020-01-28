@@ -56,7 +56,7 @@ namespace kTesterAdmin.View.Catalog
                 faculties_metroGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 faculties_metroGrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 faculties_metroGrid.Columns[0].Visible = false;
-                faculties_metroGrid.Columns[1].Width = faculties_metroGrid.Width;
+                //faculties_metroGrid.Columns[1].Width = faculties_metroGrid.Width;
                 faculties_metroGrid.Columns[1].HeaderText = "Факультет";
             }
         }

@@ -52,10 +52,13 @@ namespace kTesterAdmin.View
 
         private void OpenLogs(object sender, EventArgs e)
         {
+            this.Text = "kTester - Логи";
+            this.Refresh();
             LogsForm LF = new LogsForm(userInfo);
             content_metroPanel.Controls.Clear();
             content_metroPanel.Controls.Add(LF);
             LF.Dock = DockStyle.Fill;
+            
         }
 
         private void OpenUsers(object sender, EventArgs e)
@@ -97,6 +100,8 @@ namespace kTesterAdmin.View
 
         private void OpenFaculties(object sender, EventArgs e)
         {
+            this.Text = "kTester - Справочники - Факультеты";
+            this.Refresh();
             FacultyForm FF = new FacultyForm(userInfo);
             content_metroPanel.Controls.Clear();
             content_metroPanel.Controls.Add(FF);
