@@ -22,8 +22,9 @@ namespace kTesterServer
             { "FAC_DLT", "удалил факультет"},
             { "FAC_EDT", "отредактировал факультет"},
             { "LOG_DAT", "загрузил логи"},
-            { "LOG_USR", "загрузил логи"},
-            { "LOG_TXT", "загрузил логи"}
+            { "LOG_PRM", "загрузил логи"},
+            { "USER_GET", "загрузил список пользователей"}
+           
         };
 
         public RequestParser(string request)
@@ -66,6 +67,7 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_GET": //Список всех факультетов
+                case "USER_GET":
                     List<object[]> list = DataBase.DefaultSelectQuery(serverParametr, currentUser);
                     if (list != null)
                     {
@@ -74,6 +76,7 @@ namespace kTesterServer
                     }
                     break;
                 case "LOG_DAT":
+                case "LOG_PRM":
                 case "LOG_USR":
                 case "LOG_TXT":
                     List<object[]> paramList = DataBase.ParamSelectQuery(dict, serverParametr, currentUser);

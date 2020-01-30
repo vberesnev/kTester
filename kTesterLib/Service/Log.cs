@@ -14,11 +14,11 @@ namespace kTesterLib.Service
         public int Id { get; set; }
         private int UserId { get; set; }
         
-        private DateTime date;
-        public string Date 
-        { 
-            get { return date.ToString("HH:mm:ss"); } 
-        }
+        public DateTime Date { get; set; }
+        //public string Date 
+        //{ 
+        //    get { return date.ToString("HH:mm:ss"); } 
+        //}
         public User User { get; set; }
 
         public string Text { get; set; }
@@ -26,7 +26,7 @@ namespace kTesterLib.Service
         public Log(int id, DateTime date, string text, int userId, string user)
         {
             Id = id;
-            this.date = date;
+            Date = date;
             Text = text;
             UserId = userId;
             User = new User(userId, user);

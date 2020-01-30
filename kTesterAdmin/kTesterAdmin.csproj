@@ -64,6 +64,7 @@
     <Compile Include="Controller\LogController.cs" />
     <Compile Include="Controller\RequestSender.cs" />
     <Compile Include="Controller\SettingsController.cs" />
+    <Compile Include="Controller\SearchController.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

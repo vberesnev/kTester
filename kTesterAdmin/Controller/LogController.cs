@@ -40,7 +40,7 @@ namespace kTesterAdmin.Controller
             serverParametrsDict = new Dictionary<string, string>()
             {
                 {"getLogsByDate", "LOG_DAT" },
-                {"getLogsByUser", "LOG_USR" },
+                {"getLogsByParams", "LOG_PRM" },
                 {"getLogsByText", "LOG_TXT" }
             };
 
@@ -58,6 +58,46 @@ namespace kTesterAdmin.Controller
             var task = GetTask();
             task.Start();
             return task;
+        }
+
+        internal Task<BindingList<Log>> SearchLogsAsync(int userId, string paramert)
+        {
+            if (string.IsNullOrEmpty(paramert) || string.IsNullOrWhiteSpace(paramert))
+                paramert = "";
+
+            serverParametr = serverParametrsDict["getLogsByParams"];
+
+            queryParametrsDict.Clear();
+
+            queryParametrsDict.Add("@userId", userId.ToString());
+            queryParametrsDict.Add("@parametr", "%" + paramert + "%");
+            var task = GetTask();
+            task.Start();
+            return task;
+        }
+
+        internal Task<BindingList<Log>> FilterLogsAsync(string paramert)
+        {
+            Task<BindingList<Log>> task;
+            if (string.IsNullOrEmpty(paramert) || string.IsNullOrWhiteSpace(paramert)) 
+            {
+                task = new Task<BindingList<Log>>(() =>
+                {
+                    info(logs.Count.ToString());
+                    return DataSourse = new BindingList<Log>(logs);
+                });
+            }
+            else
+            {
+                task =  new Task<BindingList<Log>>(() =>
+                {
+                    info(logs.Count.ToString());
+                    List<Log> filterList = logs.Where(x => x.Text.Contains(paramert) || x.User.Login.Contains(paramert)).ToList();
+                    return DataSourse = new BindingList<Log>(filterList);
+                });
+            }
+            task.Start();
+            return task; 
         }
 
         private Task<BindingList<Log>> GetTask()
@@ -84,27 +124,6 @@ namespace kTesterAdmin.Controller
 
                     return DataSourse;
                 });
-        }
-
-
-
-
-        internal Task<BindingList<Log>> GetLogsByFilterAsync(string paramert)
-        {
-            var task =  new Task<BindingList<Log>>(
-                () =>
-                {
-                    DataSourse = null;
-                    var filterLogs = logs.Where(u => u.Text.Contains("фак"));
-                    if (filterLogs as List<Log> != null)
-                        DataSourse = new BindingList<Log>(filterLogs as List<Log>);
-                    else
-                        info("Нет ниодного лога");
-                    return DataSourse;
-                
-                });
-            task.Start();
-            return task;
         }
     }
 }

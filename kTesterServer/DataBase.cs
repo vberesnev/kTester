@@ -16,12 +16,14 @@ namespace kTesterServer
         static Dictionary<string, string> storageProcedures = new Dictionary<string, string>()
         {
             { "USER_AUTH", "sp_UserAuth" },
+            { "USER_GET", "sp_UserGet" },
             { "LOG_ADD", "sp_LogAdd" },
             { "FAC_GET", "sp_FacultiesGet"},
             { "FAC_ADD", "sp_FacultyAdd"},
             { "FAC_DLT", "sp_FacultyDlt"},
             { "FAC_EDT", "sp_FacultyEdt"},
             { "LOG_DAT", "sp_LogsByDate"},
+            { "LOG_PRM", "sp_LogsByParams"},
             { "LOG_USR", "sp_LogsByUser"},
             { "LOG_TXT", "sp_LogsByText"},
         };
