@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Meta\Faculty.cs" />
     <Compile Include="Meta\StudyGroup.cs" />
+    <Compile Include="Service\Helper.cs" />
     <Compile Include="Service\Log.cs" />
     <Compile Include="Service\User.cs" />
     <Compile Include="Service\UserRights.cs" />

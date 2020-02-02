@@ -30,7 +30,7 @@ namespace kTesterAdmin.View
             })));
 
 
-            logController = new LogController(info, userController);
+            logController = new LogController(info, message, userController);
             searchController = new SearchController(message, userController);
             InitializeComponent();
         }
@@ -42,19 +42,20 @@ namespace kTesterAdmin.View
             logs_metroGrid.Visible = false;
             metroDateTime.Value = DateTime.Now;
             GetUsers();
-            //GetDataSource(DateTime.Now);
         }
 
-        private async void GetDataSource(DateTime date)
+        private async void GetDataSourceAsync(DateTime date)
         {
             info_textBox.Visible = true;
             logs_metroGrid.Visible = false;
 
-            //logs_metroGrid.Rows.Clear();
-            //logs_metroGrid.Columns.Clear();
-            //logs_metroGrid.Refresh();
+            logs_metroGrid.DataSource = await logController.GetLogsByDate(date);
 
-            logs_metroGrid.DataSource = await logController.GetLogsByDateAsync(date);
+            FillLogsDataGridView();
+        }
+
+        private void FillLogsDataGridView()
+        {
             if (logs_metroGrid.DataSource != null || logs_metroGrid.Rows.Count > 0)
             {
                 logs_metroGrid.Visible = true;
@@ -85,7 +86,7 @@ namespace kTesterAdmin.View
 
         private void metroDateTime_ValueChanged(object sender, EventArgs e)
         {
-            GetDataSource(metroDateTime.Value);
+            GetDataSourceAsync(metroDateTime.Value);
         }
 
         private async void SearchLog(int userId, string parametr)
@@ -93,55 +94,19 @@ namespace kTesterAdmin.View
             info_textBox.Visible = true;
             logs_metroGrid.Visible = false;
 
-            //logs_metroGrid.Rows.Clear();
-            //logs_metroGrid.Columns.Clear();
-            //logs_metroGrid.Refresh();
+            logs_metroGrid.DataSource = await logController.SearchLogs(userId, parametr);
 
-            logs_metroGrid.DataSource = await logController.SearchLogsAsync(userId, parametr);
-            if (logs_metroGrid.DataSource != null || logs_metroGrid.Rows.Count > 0)
-            {
-                logs_metroGrid.Visible = true;
-                info_textBox.Visible = false;
-                logs_metroGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-                logs_metroGrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                logs_metroGrid.Columns[0].Visible = false;
-                logs_metroGrid.Columns[1].HeaderText = "Время";
-                logs_metroGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                logs_metroGrid.Columns[1].Width = (int)(logs_metroGrid.Width * 0.15);
-                logs_metroGrid.Columns[2].HeaderText = "Пользователь";
-                logs_metroGrid.Columns[2].Width = (int)(logs_metroGrid.Width * 0.15);
-                logs_metroGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                logs_metroGrid.Columns[3].HeaderText = "Лог";
-                logs_metroGrid.Columns[3].Width = logs_metroGrid.Width - logs_metroGrid.Columns[1].Width - logs_metroGrid.Columns[2].Width;
-            }
+            FillLogsDataGridView();
         }
 
-        private async void FilterLog(string parametr)
+        private void FilterLog(string parametr)
         {
             info_textBox.Visible = true;
             logs_metroGrid.Visible = false;
 
-            //logs_metroGrid.Rows.Clear();
-            //logs_metroGrid.Columns.Clear();
-            //logs_metroGrid.Refresh();
+            logs_metroGrid.DataSource = logController.FilterItems(parametr);
 
-            logs_metroGrid.DataSource = await logController.FilterLogsAsync(parametr);
-            if (logs_metroGrid.DataSource != null || logs_metroGrid.Rows.Count > 0)
-            {
-                logs_metroGrid.Visible = true;
-                info_textBox.Visible = false;
-                logs_metroGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-                logs_metroGrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                logs_metroGrid.Columns[0].Visible = false;
-                logs_metroGrid.Columns[1].HeaderText = "Время";
-                logs_metroGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                logs_metroGrid.Columns[1].Width = (int)(logs_metroGrid.Width * 0.15);
-                logs_metroGrid.Columns[2].HeaderText = "Пользователь";
-                logs_metroGrid.Columns[2].Width = (int)(logs_metroGrid.Width * 0.15);
-                logs_metroGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                logs_metroGrid.Columns[3].HeaderText = "Лог";
-                logs_metroGrid.Columns[3].Width = logs_metroGrid.Width - logs_metroGrid.Columns[1].Width - logs_metroGrid.Columns[2].Width;
-            }
+            FillLogsDataGridView();
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
@@ -171,7 +136,7 @@ namespace kTesterAdmin.View
                 searchText_metroTextBox.BackColor = Color.LightGray;
                 searchText_metroTextBox.Clear();
                 metroDateTime.Enabled = true;
-                GetDataSource(metroDateTime.Value);
+                GetDataSourceAsync(metroDateTime.Value);
             }
         }
 

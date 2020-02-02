@@ -9,45 +9,20 @@ using Newtonsoft.Json;
 
 namespace kTesterAdmin.Controller
 {
-    class LogController
+    class LogController: DefaultController<Log>
     {
-        private Action<string> info;
-        private AuthController userController;
-
-
-        [JsonRequired]
-        private string serverParametr;
-
-        [JsonRequired]
-        private User currentUser;
-
-        [JsonRequired]
-        private Dictionary<string, string> queryParametrsDict;
-
-        
-        private List<Log> logs;
-        private Dictionary<string, string> serverParametrsDict;
-
-        [JsonIgnore]
-        public BindingList<Log> DataSourse;
-
-        public LogController(Action<string> info, AuthController userController)
+        public LogController(Action<string> info, Action<string> mess, AuthController userController)
+            : base(info, mess, userController)
         {
-            logs = new List<Log>();
-            this.info = info;
-            currentUser = userController.GetUser();
-
             serverParametrsDict = new Dictionary<string, string>()
             {
                 {"getLogsByDate", "LOG_DAT" },
                 {"getLogsByParams", "LOG_PRM" },
                 {"getLogsByText", "LOG_TXT" }
             };
-
-            queryParametrsDict = new Dictionary<string, string>();
         }
 
-        internal Task<BindingList<Log>> GetLogsByDateAsync(DateTime date)
+        internal Task<BindingList<Log>> GetLogsByDate(DateTime date)
         {
             serverParametr = serverParametrsDict["getLogsByDate"];
             queryParametrsDict.Clear();
@@ -60,7 +35,7 @@ namespace kTesterAdmin.Controller
             return task;
         }
 
-        internal Task<BindingList<Log>> SearchLogsAsync(int userId, string paramert)
+        internal  Task<BindingList<Log>> SearchLogs(int userId, string paramert)
         {
             if (string.IsNullOrEmpty(paramert) || string.IsNullOrWhiteSpace(paramert))
                 paramert = "";
@@ -76,23 +51,23 @@ namespace kTesterAdmin.Controller
             return task;
         }
 
-        internal Task<BindingList<Log>> FilterLogsAsync(string paramert)
+        internal override Task<BindingList<Log>> FilterItems(string paramert)
         {
             Task<BindingList<Log>> task;
             if (string.IsNullOrEmpty(paramert) || string.IsNullOrWhiteSpace(paramert)) 
             {
                 task = new Task<BindingList<Log>>(() =>
                 {
-                    info(logs.Count.ToString());
-                    return DataSourse = new BindingList<Log>(logs);
+                    information(items.Count.ToString());
+                    return DataSourse = new BindingList<Log>(items);
                 });
             }
             else
             {
                 task =  new Task<BindingList<Log>>(() =>
                 {
-                    info(logs.Count.ToString());
-                    List<Log> filterList = logs.Where(x => x.Text.Contains(paramert) || x.User.Login.Contains(paramert)).ToList();
+                    information(items.Count.ToString());
+                    List<Log> filterList = items.Where(x => x.Text.Contains(paramert) || x.User.Login.Contains(paramert)).ToList();
                     return DataSourse = new BindingList<Log>(filterList);
                 });
             }
@@ -109,18 +84,18 @@ namespace kTesterAdmin.Controller
                     DataSourse = null;
                     if (result.Item1)
                     {
-                        logs.Clear();
+                        items.Clear();
                         List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
                         foreach (var arr in list)
-                            logs.Add(new Log(Convert.ToInt32(arr[0]), Convert.ToDateTime(arr[1]), arr[2].ToString(), Convert.ToInt32(arr[3]), arr[4].ToString()));
+                            items.Add(new Log(Convert.ToInt32(arr[0]), Convert.ToDateTime(arr[1]), arr[2].ToString(), Convert.ToInt32(arr[3]), arr[4].ToString()));
 
-                        if (logs.Count == 0)
-                            info("Нет ниодного лога");
+                        if (items.Count == 0)
+                            information("Нет ниодного лога");
                         else
-                            DataSourse = new BindingList<Log>(logs);
+                            DataSourse = new BindingList<Log>(items);
                     }
                     else
-                        info($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
+                        information($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
 
                     return DataSourse;
                 });

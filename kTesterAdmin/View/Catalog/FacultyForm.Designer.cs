@@ -118,7 +118,7 @@ namespace kTesterAdmin.View.Catalog
             // 
             this.delete_metroTile.ActiveControl = null;
             this.delete_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.delete_metroTile.Location = new System.Drawing.Point(476, 3);
+            this.delete_metroTile.Location = new System.Drawing.Point(466, 3);
             this.delete_metroTile.Name = "delete_metroTile";
             this.delete_metroTile.Size = new System.Drawing.Size(105, 100);
             this.delete_metroTile.Style = MetroFramework.MetroColorStyle.Red;
@@ -134,7 +134,7 @@ namespace kTesterAdmin.View.Catalog
             // 
             this.edit_metroTile.ActiveControl = null;
             this.edit_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.edit_metroTile.Location = new System.Drawing.Point(365, 3);
+            this.edit_metroTile.Location = new System.Drawing.Point(355, 3);
             this.edit_metroTile.Name = "edit_metroTile";
             this.edit_metroTile.Size = new System.Drawing.Size(105, 100);
             this.edit_metroTile.TabIndex = 4;
@@ -149,7 +149,7 @@ namespace kTesterAdmin.View.Catalog
             // 
             this.add_metroTile.ActiveControl = null;
             this.add_metroTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.add_metroTile.Location = new System.Drawing.Point(254, 3);
+            this.add_metroTile.Location = new System.Drawing.Point(244, 3);
             this.add_metroTile.Name = "add_metroTile";
             this.add_metroTile.Size = new System.Drawing.Size(105, 100);
             this.add_metroTile.TabIndex = 4;

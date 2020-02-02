@@ -17,6 +17,7 @@ namespace kTesterServer
         {
             { "USER_AUTH", "sp_UserAuth" },
             { "USER_GET", "sp_UserGet" },
+            { "USER_DLT", "sp_UserDlt" },
             { "LOG_ADD", "sp_LogAdd" },
             { "FAC_GET", "sp_FacultiesGet"},
             { "FAC_ADD", "sp_FacultyAdd"},
@@ -31,7 +32,9 @@ namespace kTesterServer
         static Dictionary<string, string> existStorageProcedures = new Dictionary<string, string>()
         {
             { "FAC_EDT", "sp_FacultyExist"},
-            { "FAC_ADD",  "sp_FacultyExist"}
+            { "FAC_ADD",  "sp_FacultyExist"},
+            { "USER_EDT", "sp_UserExist"},
+            { "USER_ADD",  "sp_UserExist"}
         };
 
         internal static void CreateLog(User user,  string text)
@@ -145,39 +148,6 @@ namespace kTesterServer
             }
         }
 
-        internal static bool? DefaultEditQuery(Dictionary<string, string> dict, string serverParametr, User user)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-
-                if (IsExist(dict, serverParametr, connection))
-                    return null;
-
-                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                foreach (KeyValuePair<string, string> parametr in dict)
-                {
-                    SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
-                    command.Parameters.Add(sqlParametr);
-                }
-
-                var result = command.ExecuteNonQuery();
-                return true;
-            }
-            catch (SqlException ex)
-            {
-                ServerLog.Log($"ОШИБКА редактирования данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
-                              $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
 
         internal static List<object[]> DefaultSelectQuery(string serverParametr, User user)
         {
@@ -290,7 +260,43 @@ namespace kTesterServer
             }
         }
 
+        internal static int DefaultEditQuery(Dictionary<string, string> dict, string serverParametr, User user)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
 
-        
+                if (IsExist(dict, serverParametr, connection))
+                    return 0;
+
+                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                foreach (KeyValuePair<string, string> parametr in dict)
+                {
+                    SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                    command.Parameters.Add(sqlParametr);
+                }
+
+                var result = command.ExecuteNonQuery();
+                int id = -1;
+                Int32.TryParse(dict["@id"], out id);
+                return id;
+            }
+            catch (SqlException ex)
+            {
+                ServerLog.Log($"ОШИБКА редактирования данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
+                              $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+
     }
 }

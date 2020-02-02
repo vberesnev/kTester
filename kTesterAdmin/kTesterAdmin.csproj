@@ -60,11 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AuthController.cs" />
+    <Compile Include="Controller\DefaultController.cs" />
     <Compile Include="Controller\FacultyController.cs" />
     <Compile Include="Controller\LogController.cs" />
     <Compile Include="Controller\RequestSender.cs" />
     <Compile Include="Controller\SettingsController.cs" />
     <Compile Include="Controller\SearchController.cs" />
+    <Compile Include="Controller\UserController.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -121,7 +123,12 @@
     <Compile Include="View\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserEventArgs.cs" />
+    <Compile Include="View\UsersForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UsersForm.Designer.cs">
+      <DependentUpon>UsersForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UsersForm.resx">
+      <DependentUpon>UsersForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\kTesterLib.Meta.Faculty.datasource" />

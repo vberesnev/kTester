@@ -19,7 +19,6 @@ namespace kTesterAdmin.View
     public partial class MainForm : MetroForm
     {
         private AuthController userInfo;
-        private UserEventArgs userEventArgs;
 
         public MainForm(AuthController authController)
         {
@@ -63,7 +62,12 @@ namespace kTesterAdmin.View
 
         private void OpenUsers(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Text = "kTester - Пользователи";
+            this.Refresh();
+            UsersForm UF = new UsersForm(userInfo);
+            content_metroPanel.Controls.Clear();
+            content_metroPanel.Controls.Add(UF);
+            UF.Dock = DockStyle.Fill;
         }
 
         private void OpenTests(object sender, EventArgs e)

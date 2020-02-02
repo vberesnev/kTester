@@ -23,8 +23,9 @@ namespace kTesterServer
             { "FAC_EDT", "отредактировал факультет"},
             { "LOG_DAT", "загрузил логи"},
             { "LOG_PRM", "загрузил логи"},
-            { "USER_GET", "загрузил список пользователей"}
-           
+            { "USER_GET", "загрузил список пользователей"},
+            { "USER_DLT", "удалил пользователя с параметрами"}
+
         };
 
         public RequestParser(string request)
@@ -87,14 +88,23 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_ADD": //добавить факультет
-                    int id = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
-                    if (id >= 0)
+                    int resultAdd = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
+                    if (resultAdd >= 0)
                     {
                         isSuccess = true;
-                        response = JsonConvert.SerializeObject(id);
+                        response = JsonConvert.SerializeObject(resultAdd);
+                    }
+                    break;
+                case "FAC_EDT": //удалить факультет
+                    int resultEdt = DataBase.DefaultEditQuery(dict, serverParametr, currentUser);
+                    if (resultEdt >= 0)
+                    {
+                        isSuccess = true;
+                        response = JsonConvert.SerializeObject(resultEdt);
                     }
                     break;
                 case "FAC_DLT": //удалить факультет
+                case "USER_DLT": //удалить факультет
                     bool resultDlt = DataBase.DefaultDeleteQuery(dict, serverParametr, currentUser);
                     if (resultDlt)
                     {
@@ -102,23 +112,9 @@ namespace kTesterServer
                         response = "Success";
                     }
                     break;
-                case "FAC_EDT": //удалить факультет
-                    bool? resultEdt = DataBase.DefaultEditQuery(dict, serverParametr, currentUser);
-                    if (resultEdt == null)
-                    {
-                        isSuccess = true;
-                        response = "IsExist";
-                    }
-                    if (resultEdt == true)
-                    {
-                        isSuccess = true;
-                        response = "Success";
-                    }
-                    break;
-
                 default: //неизвестный параметр
-                    response = "Unknown";
                     isSuccess = true;
+                    response = "Unknown";
                     ServerLog.Log($"Пользователь {currentUser.Login} отправил неопознаные данные: {requestBody}");
                     break;
             }

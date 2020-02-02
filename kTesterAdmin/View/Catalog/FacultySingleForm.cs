@@ -21,12 +21,12 @@ namespace kTesterAdmin.View.Catalog
             InitializeComponent();
             this.facultyController = facultyController;
 
-            if (facultyController.CurrentFaculty.Id == 0)
+            if (facultyController.CurrentItem.Id == 0)
                 this.Text = "Добавить факультет";
             else
             {
                 this.Text = "Редактировать факультет";
-                faculty_metroTextBox.Text = facultyController.CurrentFaculty.Name;
+                faculty_metroTextBox.Text = facultyController.CurrentItem.Name;
             }
                 
         }
@@ -36,20 +36,12 @@ namespace kTesterAdmin.View.Catalog
             if (string.IsNullOrWhiteSpace(faculty_metroTextBox.Text)) return;
 
             bool result = false;
-            if (facultyController.CurrentFaculty.Id == 0)
-            {
-                result = facultyController.AddFacultyAsync(faculty_metroTextBox.Text).Result;
-            }
-            else
-            {
-                result = facultyController.EditFacultyAsync(faculty_metroTextBox.Text).Result;
-            }
+            result = facultyController.AddOrUpdateItemAsync(faculty_metroTextBox.Text).Result;
             if (result)
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-                
+            } 
         }
     }
 }
