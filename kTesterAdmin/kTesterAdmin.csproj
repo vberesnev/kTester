@@ -123,11 +123,23 @@
     <Compile Include="View\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UserChangePassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UserChangePassForm.Designer.cs">
+      <DependentUpon>UserChangePassForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UsersForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\UsersForm.Designer.cs">
       <DependentUpon>UsersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserSingleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UserSingleForm.Designer.cs">
+      <DependentUpon>UserSingleForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="View\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
@@ -158,8 +170,14 @@
     <EmbeddedResource Include="View\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\UserChangePassForm.resx">
+      <DependentUpon>UserChangePassForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\UsersForm.resx">
       <DependentUpon>UsersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserSingleForm.resx">
+      <DependentUpon>UserSingleForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\kTesterLib.Meta.Faculty.datasource" />

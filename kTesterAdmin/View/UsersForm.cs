@@ -88,6 +88,29 @@ namespace kTesterAdmin.View
             if (userController.DeleteItemAsync().Result)
                 GetDataSourceAsync();
         }
+
+        private void add_metroTile_Click(object sender, EventArgs e)
+        {
+            userController.SetCurrentItem();
+            using (UserSingleForm USF = new UserSingleForm(userController))
+            {
+                USF.Owner = this.ParentForm;
+                if (USF.ShowDialog() == DialogResult.OK)
+                    GetDataSourceAsync();
+            }
+        }
+
+        private void edit_metroTile_Click(object sender, EventArgs e)
+        {
+            if (users_metroGrid.SelectedRows.Count == 0) return;
+            userController.SetCurrentItem((int)users_metroGrid.SelectedRows[0].Cells["Id"].Value);
+            using (UserSingleForm USF = new UserSingleForm(userController))
+            {
+                USF.Owner = this.ParentForm;
+                if (USF.ShowDialog() == DialogResult.OK)
+                    GetDataSourceAsync();
+            }
+        }
     }
     
 }

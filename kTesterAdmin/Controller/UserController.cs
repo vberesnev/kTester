@@ -52,7 +52,7 @@ namespace kTesterAdmin.Controller
                         DataSourse = new BindingList<User>(items);
                     }
                     else
-                        information($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
+                        information($"Ошибка получения данных:\r\n{result.Item2}");
 
                     return DataSourse;
                 });
@@ -72,7 +72,69 @@ namespace kTesterAdmin.Controller
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     if (!result.Item1)
                     {
-                        message($"Ошибка удаления факультета:\r\n{result.Item2}\r\nОбратитесь к администратору");
+                        message($"Ошибка удаления факультета:\r\n{result.Item2}");
+                        return false;
+                    }
+                    else
+                        return true;
+                });
+            task.Start();
+            return task;
+        }
+
+        internal override Task<bool> AddOrUpdateItemAsync(params string[] parametrs)
+        {
+            queryParametrsDict.Clear();
+            string actMessage = "";
+            if (CurrentItem.Id == 0)
+            {
+                serverParametr = serverParametrsDict["addUser"];
+                queryParametrsDict.Add("@login", parametrs[0]);
+                queryParametrsDict.Add("@password", parametrs[1]);
+                queryParametrsDict.Add("@userRights", parametrs[2]);
+                actMessage = "добавления";
+            }
+            else
+            {
+                serverParametr = serverParametrsDict["editUser"];
+                queryParametrsDict.Add("@id", CurrentItem.Id.ToString());
+                queryParametrsDict.Add("@login", parametrs[0]);
+                queryParametrsDict.Add("@password", "");
+                queryParametrsDict.Add("@userRights", parametrs[2]);
+                actMessage = "редактирования";
+            }
+
+            var task = new Task<bool>(
+                () => {
+                    Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
+                    if (result.Item1)
+                    {
+                        int id = JsonConvert.DeserializeObject<int>(result.Item2);
+                        if (id == 0)
+                            message("Пользователь с таким логином уже существует");
+                        return id > 0;
+                    }
+                    else
+                        message($"Ошибка {actMessage} пользователя:\r\n{result.Item2}");
+                    return false;
+                });
+            task.Start();
+            return task;
+        }
+
+        internal Task<bool> ChangePasswordAsync(string password)
+        {
+            serverParametr = serverParametrsDict["changePassUser"];
+            queryParametrsDict.Clear();
+            queryParametrsDict.Add("@id", CurrentItem.Id.ToString());
+            queryParametrsDict.Add("@password", password);
+
+            var task = new Task<bool>(
+                () => {
+                    Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
+                    if (!result.Item1)
+                    {
+                        message($"Ошибка смены пароля:\r\n{result.Item2}");
                         return false;
                     }
                     else

@@ -28,7 +28,6 @@ namespace kTesterAdmin.View.Catalog
                 this.Text = "Редактировать факультет";
                 faculty_metroTextBox.Text = facultyController.CurrentItem.Name;
             }
-                
         }
 
         private void save_metroButton_Click(object sender, EventArgs e)

@@ -18,6 +18,9 @@ namespace kTesterServer
             { "USER_AUTH", "sp_UserAuth" },
             { "USER_GET", "sp_UserGet" },
             { "USER_DLT", "sp_UserDlt" },
+            { "USER_ADD", "sp_UserAdd" },
+            { "USER_EDT", "sp_UserEdt" },
+            { "USER_PASS", "sp_UserPassUpd" },
             { "LOG_ADD", "sp_LogAdd" },
             { "FAC_GET", "sp_FacultiesGet"},
             { "FAC_ADD", "sp_FacultyAdd"},
@@ -62,17 +65,28 @@ namespace kTesterServer
         }
 
         #region Проверка на существование записи в таблице
-        private static bool IsExist(Dictionary<string, string> searchParametrs, string serverParametr, SqlConnection connection)
+        private static bool? IsExist(Dictionary<string, string> searchParametrs, string serverParametr, SqlConnection connection)
         {
-            SqlCommand command = new SqlCommand(existStorageProcedures[serverParametr], connection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            foreach (KeyValuePair<string, string> parametr in searchParametrs)
+            //Если словарь не содержит значения хранимой процедуры для проверки существования значения, считать, что проверка не нужна, возвращать false (элемент не содержится в таблице)
+            try
             {
-                SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
-                command.Parameters.Add(sqlParametr);
+                if (!existStorageProcedures.ContainsKey(serverParametr))
+                    return false;
+                SqlCommand command = new SqlCommand(existStorageProcedures[serverParametr], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                foreach (KeyValuePair<string, string> parametr in searchParametrs)
+                {
+                    SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                    command.Parameters.Add(sqlParametr);
+                }
+                int result = (int)command.ExecuteScalar();
+                return result > 0;
             }
-            int result = (int)command.ExecuteScalar();
-            return result > 0;
+            catch (Exception ex)
+            {
+                ServerLog.Log($"ОШИБКА проверки на существование объекта (хранимая процедура {existStorageProcedures[serverParametr]}): {ex.Message}");
+                return null;
+            }
         }
         #endregion
 
@@ -109,6 +123,11 @@ namespace kTesterServer
                 ServerLog.Log($"ОШИБКА авторизации пользователя {user.Login} с паролем {user.Password}: {ex.Message}");
                 return null;
             }
+            catch (Exception ex)
+            {
+                ServerLog.Log($"ОШИБКА {ex.Message}");
+                return null;
+            }
             finally
             {
                 connection.Close();
@@ -142,6 +161,11 @@ namespace kTesterServer
                               $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
                 return false;
             }
+            catch (Exception ex)
+            {
+                ServerLog.Log($"ОШИБКА {ex.Message}");
+                return false;
+            }
             finally
             {
                 connection.Close();
@@ -171,6 +195,11 @@ namespace kTesterServer
             catch (SqlException ex)
             {
                 ServerLog.Log($"ОШИБКА выборки данных, хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Log($"ОШИБКА {ex.Message}");
                 return null;
             }
             finally
@@ -210,6 +239,11 @@ namespace kTesterServer
                 ServerLog.Log($"ОШИБКА выборки данных, хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
                 return null;
             }
+            catch (Exception ex)
+            {
+                ServerLog.Log($"ОШИБКА {ex.Message}");
+                return null;
+            }
             finally
             {
                 connection.Close();
@@ -222,29 +256,33 @@ namespace kTesterServer
             try
             {
                 connection.Open();
-                if (!IsExist(dict, serverParametr, connection))
+
+                bool? isExist = IsExist(dict, serverParametr, connection);
+                if (isExist == null)
+                    return -1;
+
+                if (isExist == true)
+                    return 0;
+
+                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                foreach (KeyValuePair<string, string> parametr in dict)
                 {
-                    SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                    foreach (KeyValuePair<string, string> parametr in dict)
-                    {
-                        SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
-                        command.Parameters.Add(sqlParametr);
-                    }
-
-                    SqlParameter IdParametr = new SqlParameter
-                    {
-                        ParameterName = "@id",
-                        SqlDbType = SqlDbType.Int
-                    };
-                    IdParametr.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(IdParametr);
-
-                    command.ExecuteNonQuery();
-                    return (int)command.Parameters["@id"].Value;
+                    SqlParameter sqlParametr = new SqlParameter() { ParameterName = parametr.Key, Value = parametr.Value };
+                    command.Parameters.Add(sqlParametr);
                 }
-                return 0;
+
+                SqlParameter IdParametr = new SqlParameter
+                {
+                    ParameterName = "@id",
+                    SqlDbType = SqlDbType.Int
+                };
+                IdParametr.Direction = ParameterDirection.Output;
+                command.Parameters.Add(IdParametr);
+
+                command.ExecuteNonQuery();
+                return (int)command.Parameters["@id"].Value;
             }
             catch (SqlException ex)
             {
@@ -252,6 +290,11 @@ namespace kTesterServer
                                $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
                 ServerLog.BaseLog(user, $"ОШИБКА добавления данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
                                $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Log($"ОШИБКА {ex.Message}");
                 return -1;
             }
             finally
@@ -267,7 +310,11 @@ namespace kTesterServer
             {
                 connection.Open();
 
-                if (IsExist(dict, serverParametr, connection))
+                bool? isExist = IsExist(dict, serverParametr, connection);
+                if (isExist == null)
+                    return -1;
+
+                if (isExist == true)
                     return 0;
 
                 SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
@@ -288,6 +335,11 @@ namespace kTesterServer
             {
                 ServerLog.Log($"ОШИБКА редактирования данных, словарь: {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}, " +
                               $"хранимая процедура {storageProcedures[serverParametr]} {ex.Message}");
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                ServerLog.Log($"ОШИБКА {ex.Message}");
                 return -1;
             }
             finally

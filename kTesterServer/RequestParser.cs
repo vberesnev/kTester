@@ -24,7 +24,10 @@ namespace kTesterServer
             { "LOG_DAT", "загрузил логи"},
             { "LOG_PRM", "загрузил логи"},
             { "USER_GET", "загрузил список пользователей"},
-            { "USER_DLT", "удалил пользователя с параметрами"}
+            { "USER_DLT", "удалил пользователя с параметрами"},
+            { "USER_ADD", "добавил пользователя с параметрами"},
+            { "USER_EDT", "отредактировал пользователя с параметрами"},
+            { "USER_PASS", "сменил пароль"}
 
         };
 
@@ -88,6 +91,7 @@ namespace kTesterServer
                     }
                     break;
                 case "FAC_ADD": //добавить факультет
+                case "USER_ADD": //добавить пользователя
                     int resultAdd = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
                     if (resultAdd >= 0)
                     {
@@ -95,7 +99,9 @@ namespace kTesterServer
                         response = JsonConvert.SerializeObject(resultAdd);
                     }
                     break;
-                case "FAC_EDT": //удалить факультет
+                case "FAC_EDT": //редактировать факультет
+                case "USER_EDT": //редактировать пользователя
+                case "USER_PASS": //смена пароля пользователя
                     int resultEdt = DataBase.DefaultEditQuery(dict, serverParametr, currentUser);
                     if (resultEdt >= 0)
                     {
@@ -130,8 +136,7 @@ namespace kTesterServer
                 {
                     //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]}");
                     ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]}");
-                }
-                    
+                }  
             }
             else
                 response = "Exception";
