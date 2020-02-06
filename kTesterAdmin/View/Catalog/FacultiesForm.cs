@@ -11,13 +11,13 @@ using kTesterAdmin.Controller;
 
 namespace kTesterAdmin.View.Catalog
 {
-    public partial class FacultyForm : MetroFramework.Controls.MetroUserControl
+    public partial class FacultiesForm : MetroFramework.Controls.MetroUserControl
     {
 
         private FacultyController facultyController;
         private Action<string> message;
         private Action<string> info;
-        public FacultyForm(AuthController userController)
+        public FacultiesForm(AuthController userController)
         {
             
             info = new Action<string>((x) => BeginInvoke(new Action(() => info_textBox.Text = x)));

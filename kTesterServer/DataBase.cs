@@ -30,6 +30,11 @@ namespace kTesterServer
             { "LOG_PRM", "sp_LogsByParams"},
             { "LOG_USR", "sp_LogsByUser"},
             { "LOG_TXT", "sp_LogsByText"},
+            { "SGRP_GET", "sp_StudyGroupGet"},
+            { "SGRP_DLT", "sp_StudyGroupDlt"},
+            { "SGRP_PRM", "sp_StudyGroupByParams"},
+
+
         };
 
         static Dictionary<string, string> existStorageProcedures = new Dictionary<string, string>()

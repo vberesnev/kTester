@@ -99,14 +99,19 @@ namespace kTesterAdmin.View
 
         private void OpenStudyGroups(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Text = "kTester - Справочники - Учебные группы";
+            this.Refresh();
+            StudyGroupsForm SGF = new StudyGroupsForm(userInfo);
+            content_metroPanel.Controls.Clear();
+            content_metroPanel.Controls.Add(SGF);
+            SGF.Dock = DockStyle.Fill;
         }
 
         private void OpenFaculties(object sender, EventArgs e)
         {
             this.Text = "kTester - Справочники - Факультеты";
             this.Refresh();
-            FacultyForm FF = new FacultyForm(userInfo);
+            FacultiesForm FF = new FacultiesForm(userInfo);
             content_metroPanel.Controls.Clear();
             content_metroPanel.Controls.Add(FF);
             FF.Dock = DockStyle.Fill;

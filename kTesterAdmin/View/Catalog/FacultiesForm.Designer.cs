@@ -2,7 +2,7 @@
 
 namespace kTesterAdmin.View.Catalog
 {
-    partial class FacultyForm
+    partial class FacultiesForm
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -34,7 +34,7 @@ namespace kTesterAdmin.View.Catalog
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FacultyForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FacultiesForm));
             this.faculties_metroGrid = new MetroFramework.Controls.MetroGrid();
             this.info_textBox = new System.Windows.Forms.TextBox();
             this.delete_metroTile = new MetroFramework.Controls.MetroTile();

@@ -17,8 +17,7 @@ namespace kTesterAdmin.Controller
             serverParametrsDict = new Dictionary<string, string>()
             {
                 {"getLogsByDate", "LOG_DAT" },
-                {"getLogsByParams", "LOG_PRM" },
-                {"getLogsByText", "LOG_TXT" }
+                {"getLogsByParams", "LOG_PRM" }
             };
         }
 

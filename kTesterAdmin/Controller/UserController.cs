@@ -48,7 +48,7 @@ namespace kTesterAdmin.Controller
                             items.Add(new User(Convert.ToInt32(arr[0]), arr[1].ToString(), Convert.ToInt32(arr[2])));
 
                         if (items.Count == 0)
-                            information("Нет ниодного пользователя. Добавьте данные");
+                            message("Нет ниодного пользователя. Добавьте данные");
                         DataSourse = new BindingList<User>(items);
                     }
                     else

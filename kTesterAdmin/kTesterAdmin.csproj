@@ -66,6 +66,7 @@
     <Compile Include="Controller\RequestSender.cs" />
     <Compile Include="Controller\SettingsController.cs" />
     <Compile Include="Controller\SearchController.cs" />
+    <Compile Include="Controller\StudyGroupController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -81,17 +82,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Catalog\FacultyForm.cs">
+    <Compile Include="View\Catalog\FacultiesForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\Catalog\FacultyForm.Designer.cs">
-      <DependentUpon>FacultyForm.cs</DependentUpon>
+    <Compile Include="View\Catalog\FacultiesForm.Designer.cs">
+      <DependentUpon>FacultiesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Catalog\FacultySingleForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Catalog\FacultySingleForm.Designer.cs">
       <DependentUpon>FacultySingleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Catalog\StudyGroupsForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Catalog\StudyGroupsForm.Designer.cs">
+      <DependentUpon>StudyGroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Catalog\StudyGroupSingleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Catalog\StudyGroupSingleForm.Designer.cs">
+      <DependentUpon>StudyGroupSingleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LogsForm.cs">
       <SubType>UserControl</SubType>
@@ -149,11 +162,14 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Catalog\FacultyForm.resx">
-      <DependentUpon>FacultyForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\Catalog\FacultiesForm.resx">
+      <DependentUpon>FacultiesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Catalog\FacultySingleForm.resx">
       <DependentUpon>FacultySingleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Catalog\StudyGroupsForm.resx">
+      <DependentUpon>StudyGroupsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LogsForm.resx">
       <DependentUpon>LogsForm.cs</DependentUpon>

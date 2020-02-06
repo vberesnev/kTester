@@ -27,7 +27,14 @@ namespace kTesterServer
             { "USER_DLT", "удалил пользователя с параметрами"},
             { "USER_ADD", "добавил пользователя с параметрами"},
             { "USER_EDT", "отредактировал пользователя с параметрами"},
-            { "USER_PASS", "сменил пароль"}
+            { "USER_PASS", "сменил пароль"},
+            { "SGRP_GET", "загрузил список учебных групп"},
+            { "SGRP_DLT", "удалил учебную группу с параметрами"},
+            { "SGRP_PRM", "загрузил список учебных групп"},
+            
+
+
+
 
         };
 
@@ -70,8 +77,9 @@ namespace kTesterServer
                         response = JsonConvert.SerializeObject(currentUser);
                     }
                     break;
-                case "FAC_GET": //Список всех факультетов
-                case "USER_GET":
+                case "FAC_GET":  //Список всех факультетов
+                case "USER_GET": //Список пользователей системы
+                case "SGRP_GET":
                     List<object[]> list = DataBase.DefaultSelectQuery(serverParametr, currentUser);
                     if (list != null)
                     {
@@ -81,8 +89,7 @@ namespace kTesterServer
                     break;
                 case "LOG_DAT":
                 case "LOG_PRM":
-                case "LOG_USR":
-                case "LOG_TXT":
+                case "SGRP_PRM":
                     List<object[]> paramList = DataBase.ParamSelectQuery(dict, serverParametr, currentUser);
                     if (paramList != null)
                     {
@@ -92,6 +99,7 @@ namespace kTesterServer
                     break;
                 case "FAC_ADD": //добавить факультет
                 case "USER_ADD": //добавить пользователя
+                case "SGRP_DLT":
                     int resultAdd = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
                     if (resultAdd >= 0)
                     {

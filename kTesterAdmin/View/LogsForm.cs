@@ -77,7 +77,7 @@ namespace kTesterAdmin.View
         private async void GetUsers()
         {
             var bindingSource = new BindingSource();
-            bindingSource.DataSource = await searchController.GetUsersAsync();
+            bindingSource.DataSource = await searchController.GetUsers();
 
             users_metroComboBox.DataSource = bindingSource;
             users_metroComboBox.DisplayMember = "Login";
