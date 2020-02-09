@@ -89,7 +89,12 @@ namespace kTesterAdmin.View
 
         private void Subjects_metroTile_Click(object sender, EventArgs e)
         {
-            
+            this.Text = "kTester - Справочники - Предметы";
+            this.Refresh();
+            SubjectsForm SF = new SubjectsForm(userInfo);
+            content_metroPanel.Controls.Clear();
+            content_metroPanel.Controls.Add(SF);
+            SF.Dock = DockStyle.Fill;
         }
 
         private void OpenProfessors(object sender, EventArgs e)

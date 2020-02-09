@@ -35,6 +35,11 @@ namespace kTesterServer
             { "SGRP_PRM", "sp_StudyGroupByParams"},
             { "SGRP_ADD", "sp_StudyGroupAdd"},
             { "SGRP_EDT", "sp_StudyGroupEdt"},
+            { "SBJ_GET", "sp_SubjectGet"},
+            { "SBJ_ADD", "sp_SubjectAdd"},
+            { "SBJ_DLT", "sp_SubjectDlt"},
+            { "SBJ_EDT", "sp_SubjectEdt"},
+
 
 
         };
@@ -47,6 +52,8 @@ namespace kTesterServer
             { "USER_ADD",  "sp_UserExist"},
             { "SGRP_ADD", "sp_StudyGroupExist"},
             { "SGRP_EDT", "sp_StudyGroupExist"},
+            { "SBJ_ADD", "sp_SubjectExist"},
+            { "SBJ_EDT", "sp_SubjectExist"},
         };
 
         internal static void CreateLog(User user,  string text)

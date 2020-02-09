@@ -33,9 +33,13 @@ namespace kTesterServer
             { "SGRP_PRM", "загрузил список учебных групп"},
             { "SGRP_ADD", "добавил учебную группу с параметрами"},
             { "SGRP_EDT", "отредактировал учебную группу с параметрами"},
+            { "SBJ_GET", "загрузил список предметов"},
+            { "SBJ_ADD", "добавил новый пердмет"},
+            { "SBJ_DLT", "удалил пердмет"},
+            { "SBJ_EDT", "отредактировал пердмет"},
 
 
-
+            
 
 
         };
@@ -82,6 +86,7 @@ namespace kTesterServer
                 case "FAC_GET":  //Список всех факультетов
                 case "USER_GET": //Список пользователей системы
                 case "SGRP_GET":
+                case "SBJ_GET":
                     List<object[]> list = DataBase.DefaultSelectQuery(serverParametr, currentUser);
                     if (list != null)
                     {
@@ -102,6 +107,7 @@ namespace kTesterServer
                 case "FAC_ADD": //добавить факультет
                 case "USER_ADD": //добавить пользователя
                 case "SGRP_ADD": //добавить группу
+                case "SBJ_ADD": //добавить пердмет
                     int resultAdd = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
                     if (resultAdd >= 0)
                     {
@@ -113,6 +119,7 @@ namespace kTesterServer
                 case "USER_EDT": //редактировать пользователя
                 case "USER_PASS": //смена пароля пользователя
                 case "SGRP_EDT": //редактировать группу
+                case "SBJ_EDT": //редактировать пердмет
                     int resultEdt = DataBase.DefaultEditQuery(dict, serverParametr, currentUser);
                     if (resultEdt >= 0)
                     {
@@ -123,6 +130,7 @@ namespace kTesterServer
                 case "FAC_DLT": //удалить факультет
                 case "USER_DLT": //удалить пользователя
                 case "SGRP_DLT": //удалить группу
+                case "SBJ_DLT": //удалить предмет
                     bool resultDlt = DataBase.DefaultDeleteQuery(dict, serverParametr, currentUser);
                     if (resultDlt)
                     {
