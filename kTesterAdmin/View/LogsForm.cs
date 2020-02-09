@@ -58,6 +58,7 @@ namespace kTesterAdmin.View
         {
             if (logs_metroGrid.DataSource != null || logs_metroGrid.Rows.Count > 0)
             {
+                //logs_metroGrid.Refresh();
                 logs_metroGrid.Visible = true;
                 info_textBox.Visible = false;
                 logs_metroGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -99,12 +100,12 @@ namespace kTesterAdmin.View
             FillLogsDataGridView();
         }
 
-        private void FilterLog(string parametr)
+        private async void FilterLog(string parametr)
         {
             info_textBox.Visible = true;
             logs_metroGrid.Visible = false;
 
-            logs_metroGrid.DataSource = logController.FilterItems(parametr);
+            logs_metroGrid.DataSource =  await logController.FilterItems(parametr);
 
             FillLogsDataGridView();
         }

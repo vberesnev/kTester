@@ -22,12 +22,13 @@ namespace kTesterLib.Meta
         {
         }
 
-        public StudyGroup(int id, string name, int facultyId, int quality)
+        public StudyGroup(int id, string name, int facultyId, int quality, string facultyName)
         {
             Id = id;
             Name = name;
             FacultyId = facultyId;
             MenQuantity = quality;
+            Faculty = new Faculty(facultyId, facultyName);
         }
     }
 }

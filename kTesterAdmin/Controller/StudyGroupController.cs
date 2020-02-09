@@ -37,8 +37,27 @@ namespace kTesterAdmin.Controller
         {
             serverParametr = serverParametrsDict["getGroups"];
             queryParametrsDict.Clear();
-            var task = new Task<BindingList<StudyGroup>>(
-                () => {
+            var task = GetTask();
+            task.Start();
+            return task;
+        }
+
+        internal Task<BindingList<StudyGroup>> SearchStudyGroups(int facultyId)
+        {
+            serverParametr = serverParametrsDict["getGroupsByParams"];
+            queryParametrsDict.Clear();
+
+            queryParametrsDict.Add("@facultyId", facultyId.ToString());
+            var task = GetTask();
+            task.Start();
+            return task;
+        }
+
+        private Task<BindingList<StudyGroup>> GetTask()
+        {
+            return new Task<BindingList<StudyGroup>>(
+                () =>
+                {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     DataSourse = null;
                     if (result.Item1)
@@ -46,7 +65,7 @@ namespace kTesterAdmin.Controller
                         items.Clear();
                         List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
                         foreach (var arr in list)
-                            items.Add(new StudyGroup(Convert.ToInt32(arr[0]), arr[1].ToString(), Convert.ToInt32(arr[2]), Convert.ToInt32(arr[3])));
+                            items.Add(new StudyGroup(Convert.ToInt32(arr[0]), arr[1].ToString(), Convert.ToInt32(arr[2]), Convert.ToInt32(arr[3]), arr[4].ToString()));
 
                         if (items.Count == 0)
                             message("Нет ниодной учебной группы. Добавьте данные");
@@ -57,8 +76,6 @@ namespace kTesterAdmin.Controller
 
                     return DataSourse;
                 });
-            task.Start();
-            return task;
         }
 
         internal override Task<bool> DeleteItemAsync()
@@ -81,5 +98,71 @@ namespace kTesterAdmin.Controller
             task.Start();
             return task;
         }
+
+        internal override Task<BindingList<StudyGroup>> FilterItems(string paramert)
+        {
+            Task<BindingList<StudyGroup>> task;
+            if (string.IsNullOrEmpty(paramert) || string.IsNullOrWhiteSpace(paramert))
+            {
+                task = new Task<BindingList<StudyGroup>>(() =>
+                {
+                    information(items.Count.ToString());
+                    return DataSourse = new BindingList<StudyGroup>(items);
+                });
+            }
+            else
+            {
+                task = new Task<BindingList<StudyGroup>>(() =>
+                {
+                    information(items.Count.ToString());
+                    List<StudyGroup> filterList = items.Where(x => x.Name.Contains(paramert)).ToList();
+                    return DataSourse = new BindingList<StudyGroup>(filterList);
+                });
+            }
+            task.Start();
+            return task;
+        }
+
+        internal override Task<bool> AddOrUpdateItemAsync(params string[] parametrs)
+        {
+            queryParametrsDict.Clear();
+            string actMessage = "";
+            if (CurrentItem.Id == 0)
+            {
+                serverParametr = serverParametrsDict["addGroup"];
+                actMessage = "добавления";
+                queryParametrsDict.Add("@name", parametrs[0]);
+                queryParametrsDict.Add("@facultyId", parametrs[1]);
+                queryParametrsDict.Add("@quantity", parametrs[2]);
+            }
+            else
+            {
+                serverParametr = serverParametrsDict["editGroup"];
+                actMessage = "редактирования";
+                queryParametrsDict.Add("@id", CurrentItem.Id.ToString());
+                queryParametrsDict.Add("@name", parametrs[0]);
+                queryParametrsDict.Add("@facultyId", parametrs[1]);
+                queryParametrsDict.Add("@quantity", parametrs[2]);
+            }
+            
+
+            var task = new Task<bool>(
+                () => {
+                    Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
+                    if (result.Item1)
+                    {
+                        int id = JsonConvert.DeserializeObject<int>(result.Item2);
+                        if (id == 0)
+                            message("Группа с такими параметрами уже существует");
+                        return id > 0;
+                    }
+                    else
+                        message($"Ошибка {actMessage} гурппы:\r\n{result.Item2}");
+                    return false;
+                });
+            task.Start();
+            return task;
+        }
+
     }
 }

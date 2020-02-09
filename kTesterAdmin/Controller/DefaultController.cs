@@ -84,12 +84,9 @@ namespace kTesterAdmin.Controller
         /// </summary>
         /// <param name="paramert">Параметр фильтрации</param>
         /// <returns></returns>
-        internal virtual  Task<BindingList<T>> FilterItems(string paramert)
+        internal async virtual  Task<BindingList<T>> FilterItems(string paramert)
         {
-            return  new Task<BindingList<T>>(() => { return null; });
+            return await new Task<BindingList<T>>(() => { return null; });
         }
-
-
-
     }
 }

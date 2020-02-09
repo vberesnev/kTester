@@ -33,6 +33,8 @@ namespace kTesterServer
             { "SGRP_GET", "sp_StudyGroupGet"},
             { "SGRP_DLT", "sp_StudyGroupDlt"},
             { "SGRP_PRM", "sp_StudyGroupByParams"},
+            { "SGRP_ADD", "sp_StudyGroupAdd"},
+            { "SGRP_EDT", "sp_StudyGroupEdt"},
 
 
         };
@@ -42,7 +44,9 @@ namespace kTesterServer
             { "FAC_EDT", "sp_FacultyExist"},
             { "FAC_ADD",  "sp_FacultyExist"},
             { "USER_EDT", "sp_UserExist"},
-            { "USER_ADD",  "sp_UserExist"}
+            { "USER_ADD",  "sp_UserExist"},
+            { "SGRP_ADD", "sp_StudyGroupExist"},
+            { "SGRP_EDT", "sp_StudyGroupExist"},
         };
 
         internal static void CreateLog(User user,  string text)

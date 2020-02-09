@@ -12,8 +12,6 @@ namespace kTesterAdmin.Controller
 {
     public class SearchController
     {
-
-
         [JsonRequired]
         private string serverParametr;
         private Dictionary<string, string> serverParametrsDict;
@@ -94,7 +92,7 @@ namespace kTesterAdmin.Controller
                     else
                     {
                         message($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
-                        users.Clear();
+                        faculties.Clear();
                         return faculties;
                     }
                 });

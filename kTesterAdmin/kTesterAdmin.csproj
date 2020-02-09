@@ -171,6 +171,9 @@
     <EmbeddedResource Include="View\Catalog\StudyGroupsForm.resx">
       <DependentUpon>StudyGroupsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Catalog\StudyGroupSingleForm.resx">
+      <DependentUpon>StudyGroupSingleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LogsForm.resx">
       <DependentUpon>LogsForm.cs</DependentUpon>
     </EmbeddedResource>
