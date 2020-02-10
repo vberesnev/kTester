@@ -26,16 +26,16 @@ namespace kTesterAdmin.View.Catalog
             else
             {
                 this.Text = "Редактировать предмет";
-                faculty_metroTextBox.Text = subjectController.CurrentItem.Name;
+                subject_metroTextBox.Text = subjectController.CurrentItem.Name;
             }
         }
 
         private void save_metroButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(faculty_metroTextBox.Text)) return;
+            if (string.IsNullOrWhiteSpace(subject_metroTextBox.Text)) return;
 
             bool result = false;
-            result = subjectController.AddOrUpdateItemAsync(faculty_metroTextBox.Text).Result;
+            result = subjectController.AddOrUpdateItemAsync(subject_metroTextBox.Text).Result;
             if (result)
             {
                 this.DialogResult = DialogResult.OK;

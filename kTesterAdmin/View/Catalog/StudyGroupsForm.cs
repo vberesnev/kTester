@@ -49,7 +49,7 @@ namespace kTesterAdmin.View.Catalog
             studyGroups_metroGrid.Visible = false;
 
             studyGroups_metroGrid.DataSource = await studyGroupController.GetDataAsync();
-            FillGroupsDataGridView();
+            FillDataGrid();
         }
 
         private async void GetFacultiesAsync()
@@ -84,7 +84,7 @@ namespace kTesterAdmin.View.Catalog
             info_textBox.Visible = true;
             studyGroups_metroGrid.Visible = false;
             studyGroups_metroGrid.DataSource = await studyGroupController.FilterItems(parametr);
-            FillGroupsDataGridView();
+            FillDataGrid();
         }
 
         private async void SearchGroupsAsync(int facultyId)
@@ -94,10 +94,10 @@ namespace kTesterAdmin.View.Catalog
 
             studyGroups_metroGrid.DataSource = await studyGroupController.SearchStudyGroups(facultyId);
 
-            FillGroupsDataGridView();
+            FillDataGrid();
         }
 
-        private void FillGroupsDataGridView()
+        private void FillDataGrid()
         {
             if (studyGroups_metroGrid.DataSource != null || studyGroups_metroGrid.Rows.Count > 0)
             {

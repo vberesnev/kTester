@@ -11,33 +11,33 @@ using Newtonsoft.Json;
 
 namespace kTesterAdmin.Controller
 {   
-    public class SubjectController: DefaultController<Subject>
+    public class ProfessorController: DefaultController<Professor>
     {
-        public SubjectController(Action<string> info, Action<string> mess, AuthController userController)
+        public ProfessorController(Action<string> info, Action<string> mess, AuthController userController)
             :base (info, mess, userController)
         {
             serverParametrsDict = new Dictionary<string, string>()
             {
-                {"getSubject", "SBJ_GET" },
-                {"addSubject", "SBJ_ADD" },
-                {"editSubject", "SBJ_EDT" },
-                {"deleteSubject", "SBJ_DLT" }
+                {"getProfessor", "PRF_GET" },
+                {"addProfessor", "PRF_ADD" },
+                {"editProfessor", "PRF_EDT" },
+                {"deleteProfessor", "PRF_DLT" }
             };
         }
 
         public override void SetCurrentItem(int id=0)
         {
             if (id == 0)
-                CurrentItem = new Subject();
+                CurrentItem = new Professor();
             else
                 CurrentItem = items.FirstOrDefault(x => x.Id == id);
         }
 
-        internal override Task<BindingList<Subject>> GetDataAsync()
+        internal override Task<BindingList<Professor>> GetDataAsync()
         {
-            serverParametr = serverParametrsDict["getSubject"];
+            serverParametr = serverParametrsDict["getProfessor"];
             queryParametrsDict.Clear();
-            var task = new Task<BindingList<Subject>>(
+            var task = new Task<BindingList<Professor>>(
                 () => {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     DataSourse = null;
@@ -46,11 +46,11 @@ namespace kTesterAdmin.Controller
                         items.Clear();
                         List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
                         foreach (var arr in list)
-                            items.Add(new Subject(Convert.ToInt32(arr[0]), arr[1].ToString()));
+                            items.Add(new Professor(Convert.ToInt32(arr[0]), arr[1].ToString(), Convert.ToInt32(arr[2]), arr[3].ToString()));
 
                         if (items.Count == 0)
-                            message("Нет ниодного учебного предмета. Добавьте данные");
-                        DataSourse = new BindingList<Subject>(items);
+                            message("Нет ниодного преподавателя. Добавьте данные");
+                        DataSourse = new BindingList<Professor>(items);
                     }
                     else
                         information($"Ошибка получения данных:\r\n{result.Item2}\r\nОбратитесь к администратору");
@@ -67,15 +67,17 @@ namespace kTesterAdmin.Controller
             string actMessage = "";
             if (CurrentItem.Id == 0)
             {
-                serverParametr = serverParametrsDict["addSubject"];
+                serverParametr = serverParametrsDict["addProfessor"];
                 queryParametrsDict.Add("@name", parametrs[0]);
+                queryParametrsDict.Add("@userId", parametrs[1]);
                 actMessage = "добавления";
             }
             else
             {
-                serverParametr = serverParametrsDict["editSubject"];
+                serverParametr = serverParametrsDict["editProfessor"];
                 queryParametrsDict.Add("@id", CurrentItem.Id.ToString());
                 queryParametrsDict.Add("@name", parametrs[0]);
+                queryParametrsDict.Add("@userId", parametrs[1]);
                 actMessage = "редактирования";
             }
             
@@ -86,11 +88,11 @@ namespace kTesterAdmin.Controller
                     {
                         int id = JsonConvert.DeserializeObject<int>(result.Item2);
                         if (id == 0)
-                            message("Такой предмет уже существует");
+                            message("Такой преподаватель уже существует");
                         return id > 0;
                     }
                     else
-                        message($"Ошибка {actMessage} предмета:\r\n{result.Item2}\r\nОбратитесь к администратору");
+                        message($"Ошибка {actMessage} преподавателя:\r\n{result.Item2}\r\nОбратитесь к администратору");
                     return false;
                 });
             task.Start();
@@ -99,7 +101,7 @@ namespace kTesterAdmin.Controller
 
         internal override Task<bool> DeleteItemAsync()
         {
-            serverParametr = serverParametrsDict["deleteSubject"];
+            serverParametr = serverParametrsDict["deleteProfessor"];
             queryParametrsDict.Clear();
             queryParametrsDict.Add("@id", CurrentItem.Id.ToString());
 
@@ -108,12 +110,36 @@ namespace kTesterAdmin.Controller
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     if (!result.Item1)
                     {
-                        message($"Ошибка удаления предмета:\r\n{result.Item2}\r\nОбратитесь к администратору");
+                        message($"Ошибка удаления преподавателя:\r\n{result.Item2}\r\nОбратитесь к администратору");
                         return false;
                     }
                     else
                         return true;
                 });
+            task.Start();
+            return task;
+        }
+
+        internal override Task<BindingList<Professor>> FilterItems(string paramert)
+        {
+            Task<BindingList<Professor>> task;
+            if (string.IsNullOrEmpty(paramert) || string.IsNullOrWhiteSpace(paramert))
+            {
+                task = new Task<BindingList<Professor>>(() =>
+                {
+                    information(items.Count.ToString());
+                    return DataSourse = new BindingList<Professor>(items);
+                });
+            }
+            else
+            {
+                task = new Task<BindingList<Professor>>(() =>
+                {
+                    information(items.Count.ToString());
+                    List<Professor> filterList = items.Where(x => x.Name.ToLower().Contains(paramert.ToLower()) || x.User.Login.Contains(paramert)).ToList();
+                    return DataSourse = new BindingList<Professor>(filterList);
+                });
+            }
             task.Start();
             return task;
         }

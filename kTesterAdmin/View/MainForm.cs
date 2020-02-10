@@ -99,7 +99,12 @@ namespace kTesterAdmin.View
 
         private void OpenProfessors(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Text = "kTester - Справочники - Профессоры";
+            this.Refresh();
+            ProfessorsForm PF = new ProfessorsForm(userInfo);
+            content_metroPanel.Controls.Clear();
+            content_metroPanel.Controls.Add(PF);
+            PF.Dock = DockStyle.Fill;
         }
 
         private void OpenStudyGroups(object sender, EventArgs e)

@@ -53,7 +53,7 @@
             this.password_metroTextBox.MaxLength = 32767;
             this.password_metroTextBox.Name = "password_metroTextBox";
             this.password_metroTextBox.PasswordChar = '*';
-            this.password_metroTextBox.PromptText = "Пароль";
+            this.password_metroTextBox.WaterMark = "Пароль";
             this.password_metroTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.password_metroTextBox.SelectedText = "";
             this.password_metroTextBox.SelectionLength = 0;
@@ -86,7 +86,7 @@
             this.confirmPass_metroTextBox.MaxLength = 32767;
             this.confirmPass_metroTextBox.Name = "confirmPass_metroTextBox";
             this.confirmPass_metroTextBox.PasswordChar = '*';
-            this.confirmPass_metroTextBox.PromptText = "Подтвердить пароль";
+            this.confirmPass_metroTextBox.WaterMark = "Подтвердить пароль";
             this.confirmPass_metroTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.confirmPass_metroTextBox.SelectedText = "";
             this.confirmPass_metroTextBox.SelectionLength = 0;

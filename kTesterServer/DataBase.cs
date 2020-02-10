@@ -39,8 +39,10 @@ namespace kTesterServer
             { "SBJ_ADD", "sp_SubjectAdd"},
             { "SBJ_DLT", "sp_SubjectDlt"},
             { "SBJ_EDT", "sp_SubjectEdt"},
-
-
+            { "PRF_GET", "sp_ProfessorGet"},
+            { "PRF_ADD", "sp_ProfessorAdd"},
+            { "PRF_DLT", "sp_ProfessorDlt"},
+            { "PRF_EDT", "sp_ProfessorEdt"},
 
         };
 
@@ -54,6 +56,8 @@ namespace kTesterServer
             { "SGRP_EDT", "sp_StudyGroupExist"},
             { "SBJ_ADD", "sp_SubjectExist"},
             { "SBJ_EDT", "sp_SubjectExist"},
+            { "PRF_ADD", "sp_ProfessorExist"},
+            { "PRF_EDT", "sp_ProfessorExist"},
         };
 
         internal static void CreateLog(User user,  string text)

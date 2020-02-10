@@ -37,11 +37,10 @@ namespace kTesterServer
             { "SBJ_ADD", "добавил новый пердмет"},
             { "SBJ_DLT", "удалил пердмет"},
             { "SBJ_EDT", "отредактировал пердмет"},
-
-
-            
-
-
+            { "PRF_GET", "загрузил список профессоров"},
+            { "PRF_ADD", "добавил нового профессора"},
+            { "PRF_DLT", "удалил профессора"},
+            { "PRF_EDT", "отредактировал профессора"},
         };
 
         public RequestParser(string request)
@@ -87,6 +86,7 @@ namespace kTesterServer
                 case "USER_GET": //Список пользователей системы
                 case "SGRP_GET":
                 case "SBJ_GET":
+                case "PRF_GET":
                     List<object[]> list = DataBase.DefaultSelectQuery(serverParametr, currentUser);
                     if (list != null)
                     {
@@ -108,6 +108,7 @@ namespace kTesterServer
                 case "USER_ADD": //добавить пользователя
                 case "SGRP_ADD": //добавить группу
                 case "SBJ_ADD": //добавить пердмет
+                case "PRF_ADD":
                     int resultAdd = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
                     if (resultAdd >= 0)
                     {
@@ -120,6 +121,7 @@ namespace kTesterServer
                 case "USER_PASS": //смена пароля пользователя
                 case "SGRP_EDT": //редактировать группу
                 case "SBJ_EDT": //редактировать пердмет
+                case "PRF_EDT":
                     int resultEdt = DataBase.DefaultEditQuery(dict, serverParametr, currentUser);
                     if (resultEdt >= 0)
                     {
@@ -131,6 +133,7 @@ namespace kTesterServer
                 case "USER_DLT": //удалить пользователя
                 case "SGRP_DLT": //удалить группу
                 case "SBJ_DLT": //удалить предмет
+                case "PRF_DLT":
                     bool resultDlt = DataBase.DefaultDeleteQuery(dict, serverParametr, currentUser);
                     if (resultDlt)
                     {

@@ -13,8 +13,25 @@ namespace kTesterLib.Meta
     public class Professor
     {
         public int Id { get; set; }
+
+        public string Name { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        public string Name { get; set; }
+
+        public Professor() { }
+
+        public Professor(int id, string name, int userId, string userName)
+        {
+            Id = id;
+            Name = name;
+            UserId = userId;
+            User = new User(userId, userName);
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

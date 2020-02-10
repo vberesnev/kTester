@@ -31,7 +31,7 @@ namespace kTesterAdmin.View.Catalog
             InitializeComponent();
         }
 
-        private void FacultyForm_Load(object sender, EventArgs e)
+        private void Form_Load(object sender, EventArgs e)
         {
             info_textBox.Text = "Загрузка данных, подождите . . .";
             GetDataSourceAsync();
@@ -61,11 +61,11 @@ namespace kTesterAdmin.View.Catalog
             if (MetroFramework.MetroMessageBox.Show(this, $"Вы действительно хотите удалить факультет {subjects_metroGrid.Rows[row].Cells["Name"].Value}?",
                     "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                DeleteFaculty((int)subjects_metroGrid.Rows[row].Cells["Id"].Value);
+                Delete((int)subjects_metroGrid.Rows[row].Cells["Id"].Value);
             }
         }
 
-        private void DeleteFaculty(int id)
+        private void Delete(int id)
         {
             info_textBox.Visible = true;
             subjects_metroGrid.Visible = false;

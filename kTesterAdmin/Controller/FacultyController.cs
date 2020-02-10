@@ -49,7 +49,7 @@ namespace kTesterAdmin.Controller
                             items.Add(new Faculty(Convert.ToInt32(arr[0]), arr[1].ToString()));
 
                         if (items.Count == 0)
-                            information("Нет ниодного факультета. Добавьте данные");
+                            message("Нет ниодного факультета. Добавьте данные");
                         DataSourse = new BindingList<Faculty>(items);
                     }
                     else
