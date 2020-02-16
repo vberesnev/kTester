@@ -12,6 +12,7 @@ using MetroFramework.Components;
 using MetroFramework.Forms;
 using kTesterAdmin.View.Menu;
 using kTesterAdmin.View.Catalog;
+using kTesterAdmin.View.Tests;
 using kTesterAdmin.Controller;
 
 namespace kTesterAdmin.View
@@ -33,7 +34,8 @@ namespace kTesterAdmin.View
         {
             InitializeComponent();
 
-            userInfo = new AuthController(1, "admin", "admin", 1);
+            //userInfo = new AuthController(1, "admin", "admin", 1);
+            userInfo = new AuthController(1004, "prof3", "123", 2);
             this.MinimumSize = new Size(650, 400);
             OpenAdminMenu(this, null);
         }
@@ -72,7 +74,12 @@ namespace kTesterAdmin.View
 
         private void OpenTests(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Text = "kTester - Тесты";
+            this.Refresh();
+            TestsForm TF = new TestsForm(userInfo);
+            content_metroPanel.Controls.Clear();
+            content_metroPanel.Controls.Add(TF);
+            TF.Dock = DockStyle.Fill;
         }
 
         private void OpenCatalogs(object sender, EventArgs e)

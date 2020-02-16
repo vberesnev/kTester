@@ -41,6 +41,8 @@ namespace kTesterServer
             { "PRF_ADD", "добавил нового профессора"},
             { "PRF_DLT", "удалил профессора"},
             { "PRF_EDT", "отредактировал профессора"},
+            { "TEST_GET", "загрузил список тестов" },
+            { "TEST_DLT", "удалил тест" }
         };
 
         public RequestParser(string request)
@@ -97,6 +99,8 @@ namespace kTesterServer
                 case "LOG_DAT":
                 case "LOG_PRM":
                 case "SGRP_PRM":
+                case "PRF_GET_BY_USER":
+                case "TEST_GET":
                     List<object[]> paramList = DataBase.ParamSelectQuery(dict, serverParametr, currentUser);
                     if (paramList != null)
                     {
@@ -107,7 +111,7 @@ namespace kTesterServer
                 case "FAC_ADD": //добавить факультет
                 case "USER_ADD": //добавить пользователя
                 case "SGRP_ADD": //добавить группу
-                case "SBJ_ADD": //добавить пердмет
+                case "SBJ_ADD": //добавить предмет
                 case "PRF_ADD":
                     int resultAdd = DataBase.DefaultAddQuery(dict, serverParametr, currentUser);
                     if (resultAdd >= 0)
@@ -120,7 +124,7 @@ namespace kTesterServer
                 case "USER_EDT": //редактировать пользователя
                 case "USER_PASS": //смена пароля пользователя
                 case "SGRP_EDT": //редактировать группу
-                case "SBJ_EDT": //редактировать пердмет
+                case "SBJ_EDT": //редактировать предмет
                 case "PRF_EDT":
                     int resultEdt = DataBase.DefaultEditQuery(dict, serverParametr, currentUser);
                     if (resultEdt >= 0)
@@ -134,6 +138,7 @@ namespace kTesterServer
                 case "SGRP_DLT": //удалить группу
                 case "SBJ_DLT": //удалить предмет
                 case "PRF_DLT":
+                case "TEST_DLT":
                     bool resultDlt = DataBase.DefaultDeleteQuery(dict, serverParametr, currentUser);
                     if (resultDlt)
                     {
@@ -149,17 +154,20 @@ namespace kTesterServer
             }
             if (isSuccess)
             {
-                if (dict.Count > 0)
+                if (logParams.ContainsKey("PRF_GET_BY_USER"))
                 {
-                    //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]} " +
-                     //             $"c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
-                    ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]} c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                    if (dict.Count > 0)
+                    {
+                        //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]} " +
+                        //             $"c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                        ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]} c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                    }
+                    else
+                    {
+                        //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]}");
+                        ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]}");
+                    }
                 }
-                else
-                {
-                    //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]}");
-                    ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]}");
-                }  
             }
             else
                 response = "Exception";

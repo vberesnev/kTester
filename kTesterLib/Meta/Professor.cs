@@ -28,6 +28,18 @@ namespace kTesterLib.Meta
             User = new User(userId, userName);
         }
 
+        public Professor(int id, string name, int userId)
+        {
+            Id = id;
+            Name = name;
+            UserId = userId;
+        }
+        public Professor(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         public override string ToString()
         {
             return Name;

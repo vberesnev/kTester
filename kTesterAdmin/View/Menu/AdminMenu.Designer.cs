@@ -51,7 +51,7 @@
             // catalogs_metroTile
             // 
             this.catalogs_metroTile.ActiveControl = null;
-            this.catalogs_metroTile.Location = new System.Drawing.Point(3, 215);
+            this.catalogs_metroTile.Location = new System.Drawing.Point(3, 109);
             this.catalogs_metroTile.Name = "catalogs_metroTile";
             this.catalogs_metroTile.Size = new System.Drawing.Size(105, 100);
             this.catalogs_metroTile.TabIndex = 1;
@@ -77,7 +77,7 @@
             // users_metroTile
             // 
             this.users_metroTile.ActiveControl = null;
-            this.users_metroTile.Location = new System.Drawing.Point(3, 109);
+            this.users_metroTile.Location = new System.Drawing.Point(3, 215);
             this.users_metroTile.Name = "users_metroTile";
             this.users_metroTile.Size = new System.Drawing.Size(105, 100);
             this.users_metroTile.TabIndex = 4;

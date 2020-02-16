@@ -69,6 +69,7 @@
     <Compile Include="Controller\SettingsController.cs" />
     <Compile Include="Controller\SearchController.cs" />
     <Compile Include="Controller\StudyGroupController.cs" />
+    <Compile Include="Controller\TestController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -162,6 +163,24 @@
     <Compile Include="View\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Tests\TestListForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Tests\TestListForm.Designer.cs">
+      <DependentUpon>TestListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tests\TestsForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Tests\TestsForm.Designer.cs">
+      <DependentUpon>TestsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tests\TestSingleForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Tests\TestSingleForm.Designer.cs">
+      <DependentUpon>TestSingleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserChangePassForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +245,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Tests\TestListForm.resx">
+      <DependentUpon>TestListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Tests\TestsForm.resx">
+      <DependentUpon>TestsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserChangePassForm.resx">
       <DependentUpon>UserChangePassForm.cs</DependentUpon>

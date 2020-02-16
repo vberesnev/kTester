@@ -43,6 +43,9 @@ namespace kTesterServer
             { "PRF_ADD", "sp_ProfessorAdd"},
             { "PRF_DLT", "sp_ProfessorDlt"},
             { "PRF_EDT", "sp_ProfessorEdt"},
+            { "PRF_GET_BY_USER", "sp_ProfessorGetByUser"},
+            { "TEST_GET", "sp_TestsGet"},
+            { "TEST_DLT", "sp_TestDlt" },
 
         };
 

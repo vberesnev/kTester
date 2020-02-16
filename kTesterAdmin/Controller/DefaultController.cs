@@ -33,6 +33,11 @@ namespace kTesterAdmin.Controller
         protected Action<string> information; //информационное сообщение, показывается на форме
         protected Action<string> message; //информационное сообщение, вызывающее MessageBox
 
+        public void SetInformation(Action<string> info)
+        {
+            information = info;
+        }
+
         public DefaultController(Action<string> info, Action<string> mess, AuthController userController)
         {
             items = new List<T>();

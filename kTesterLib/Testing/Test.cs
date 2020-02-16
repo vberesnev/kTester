@@ -13,13 +13,30 @@ namespace kTesterLib.Testing
     public class Test
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
         public int ProfessorId { get; set; }
         public Professor Professor { get; set; }
-        public int QuestionsCount { get; set; }
+        public int QuestionsQuantity { get; set; }
 
         public List<Question> Questions;
+
+        public Test() { }
+        public Test(int id, string title, int subjectId, string subjectName, int professorId, string professorName, int questionsQuantity)
+        {
+            Id = id;
+            Title = title;
+            SubjectId = subjectId;
+            Subject = new Subject(subjectId, subjectName);
+            ProfessorId = professorId;
+            Professor = new Professor(professorId, professorName);
+            QuestionsQuantity = questionsQuantity;
+        }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

@@ -21,5 +21,10 @@ namespace kTesterLib.Meta
         }
 
         public Subject() { }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
