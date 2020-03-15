@@ -52,12 +52,14 @@ namespace kTesterAdmin.View
                 users_metroGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 users_metroGrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 users_metroGrid.Columns[0].Visible = false;
-                users_metroGrid.Columns[1].HeaderText = "Пользователь";
+                users_metroGrid.Columns[1].HeaderText = "Логин";
                 users_metroGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                users_metroGrid.Columns[1].Width = (int)(users_metroGrid.Width * 0.5);
-                users_metroGrid.Columns[2].Visible = false;
-                users_metroGrid.Columns[3].HeaderText = "Тип";
-                users_metroGrid.Columns[3].Width = (int)(users_metroGrid.Width * 0.5);
+                users_metroGrid.Columns[1].Width = (int)(users_metroGrid.Width * 0.33);
+                users_metroGrid.Columns[2].HeaderText = "Тип";
+                users_metroGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                users_metroGrid.Columns[2].Width = (int)(users_metroGrid.Width * 0.33);
+                users_metroGrid.Columns[3].HeaderText = "ФИО";
+                users_metroGrid.Columns[3].Width = (int)(users_metroGrid.Width * 0.33);
                 users_metroGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }

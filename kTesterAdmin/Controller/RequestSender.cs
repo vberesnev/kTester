@@ -55,7 +55,6 @@ namespace kTesterAdmin.Controller
                 socket.Close();
 
             }
-
         }
     }
 }

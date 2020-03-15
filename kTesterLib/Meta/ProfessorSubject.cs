@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kTesterLib.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,8 @@ namespace kTesterLib.Meta
     public class ProfessorSubject
     {
         public int Id { get; set; }
-        public int ProfessorId { get; set; }
-        public Professor Processor { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
     }

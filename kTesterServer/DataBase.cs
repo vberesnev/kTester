@@ -39,14 +39,8 @@ namespace kTesterServer
             { "SBJ_ADD", "sp_SubjectAdd"},
             { "SBJ_DLT", "sp_SubjectDlt"},
             { "SBJ_EDT", "sp_SubjectEdt"},
-            { "PRF_GET", "sp_ProfessorGet"},
-            { "PRF_ADD", "sp_ProfessorAdd"},
-            { "PRF_DLT", "sp_ProfessorDlt"},
-            { "PRF_EDT", "sp_ProfessorEdt"},
-            { "PRF_GET_BY_USER", "sp_ProfessorGetByUser"},
             { "TEST_GET", "sp_TestsGet"},
             { "TEST_DLT", "sp_TestDlt" },
-
         };
 
         static Dictionary<string, string> existStorageProcedures = new Dictionary<string, string>()
@@ -114,48 +108,48 @@ namespace kTesterServer
         #endregion
 
         #region Авторизация пользователей
-        public static User GetUser(User user, string serverParametr)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlParameter loginP = new SqlParameter() { ParameterName = "@login", Value = user.Login };
-                command.Parameters.Add(loginP);
-                SqlParameter passwordP = new SqlParameter() { ParameterName = "@password", Value = user.Password };
-                command.Parameters.Add(passwordP);
+        //public static User GetUser(User user, string serverParametr)
+        //{
+        //    SqlConnection connection = new SqlConnection(connectionString);
+        //    try
+        //    {
+        //        connection.Open();
+        //        SqlCommand command = new SqlCommand(storageProcedures[serverParametr], connection);
+        //        command.CommandType = System.Data.CommandType.StoredProcedure;
+        //        SqlParameter loginP = new SqlParameter() { ParameterName = "@login", Value = user.Login };
+        //        command.Parameters.Add(loginP);
+        //        SqlParameter passwordP = new SqlParameter() { ParameterName = "@password", Value = user.Password };
+        //        command.Parameters.Add(passwordP);
 
-                var result = command.ExecuteReader();
-                if (result.HasRows)
-                {
-                    while (result.Read())
-                    {
-                        return new User((int)result[0], result[1].ToString(), result[2].ToString(), (int)result[3]);
-                    }
-                    return null;
-                }
-                else 
-                {
-                    return user;
-                }
-            }
-            catch (SqlException ex)
-            {
-                ServerLog.Log($"ОШИБКА авторизации пользователя {user.Login} с паролем {user.Password}: {ex.Message}");
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ServerLog.Log($"ОШИБКА {ex.Message}");
-                return null;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+        //        var result = command.ExecuteReader();
+        //        if (result.HasRows)
+        //        {
+        //            while (result.Read())
+        //            {
+        //                return new User((int)result[0], result[1].ToString(), result[2].ToString(), (int)result[3]);
+        //            }
+        //            return null;
+        //        }
+        //        else 
+        //        {
+        //            return user;
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        ServerLog.Log($"ОШИБКА авторизации пользователя {user.Login} с паролем {user.Password}: {ex.Message}");
+        //        return null;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ServerLog.Log($"ОШИБКА {ex.Message}");
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //}
 
         
         #endregion

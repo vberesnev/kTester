@@ -35,18 +35,21 @@ namespace kTesterAdmin.View
                 login_metroTextBox.Text = userController.CurrentItem.Login;
                 password_metroTextBox.Visible = false;
                 userRights_metroComboBox.SelectedItem = userController.CurrentItem.UserRights;
+                name_metroTextBox.Text = userController.CurrentItem.Name;
             }
         }
 
         private void save_metroButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(login_metroTextBox.Text)) return;
+            if (string.IsNullOrWhiteSpace(login_metroTextBox.Text) || string.IsNullOrWhiteSpace(name_metroTextBox.Text)) return;
             if (password_metroTextBox.Visible && string.IsNullOrWhiteSpace(password_metroTextBox.Text)) return;
 
             bool result = false;
             result = userController.AddOrUpdateItemAsync(login_metroTextBox.Text, 
                                                          password_metroTextBox.Text, 
-                                                         Convert.ToInt32(userRights_metroComboBox.SelectedItem).ToString()).Result;
+                                                         Convert.ToInt32(userRights_metroComboBox.SelectedItem).ToString(),
+                                                         name_metroTextBox.Text
+                                                         ).Result;
             if (result)
             {
                 this.DialogResult = DialogResult.OK;

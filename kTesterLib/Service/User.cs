@@ -11,15 +11,17 @@ namespace kTesterLib.Service
     /// </summary>
     public class User
     {
-        public int Id { get;  set; }
-        public string Login { get;  set; }
-        public string Password { get; private set; }
+        public int Id { get;  private set; }
+        public string Login { get;  private set; }
+        //public string Password { get; private set; }
         public UserRights UserRights { get; private set; }
+        public string Name { get; private set; }
 
-        public User(string login, string password)
+        
+        public User() { }
+        public User(string login)
         {
             Login = login;
-            Password = password;
         }
 
         public User(int id, string login)
@@ -28,23 +30,14 @@ namespace kTesterLib.Service
             Login = login;
         }
 
-        public User(int id, string login, int rights)
+        public User(int id, string login, int rights, string name)
         {
             Id = id;
             Login = login;
             UserRights = (UserRights)rights;
+            Name = name;
         }
-
-        public User(int id, string login, string password, int rights)
-        {
-            Id = id;
-            Login = login;
-            Password = password;
-            UserRights = (UserRights)rights;
-        }
-
-        public User() { }
-
+        
         public override string ToString()
         {
             return Login;

@@ -45,7 +45,7 @@ namespace kTesterAdmin.Controller
                         items.Clear();
                         List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
                         foreach (var arr in list)
-                            items.Add(new User(Convert.ToInt32(arr[0]), arr[1].ToString(), Convert.ToInt32(arr[2])));
+                            items.Add(new User(Convert.ToInt32(arr[0]), arr[1].ToString(), Convert.ToInt32(arr[2]), arr[3].ToString()));
 
                         if (items.Count == 0)
                             message("Нет ниодного пользователя. Добавьте данные");
@@ -86,21 +86,21 @@ namespace kTesterAdmin.Controller
         {
             queryParametrsDict.Clear();
             string actMessage = "";
+
+            queryParametrsDict.Add("@login", parametrs[0]);
+            queryParametrsDict.Add("@password", parametrs[1]);
+            queryParametrsDict.Add("@userRights", parametrs[2]);
+            queryParametrsDict.Add("@userName", parametrs[3]);
+
             if (CurrentItem.Id == 0)
             {
                 serverParametr = serverParametrsDict["addUser"];
-                queryParametrsDict.Add("@login", parametrs[0]);
-                queryParametrsDict.Add("@password", parametrs[1]);
-                queryParametrsDict.Add("@userRights", parametrs[2]);
                 actMessage = "добавления";
             }
             else
             {
                 serverParametr = serverParametrsDict["editUser"];
                 queryParametrsDict.Add("@id", CurrentItem.Id.ToString());
-                queryParametrsDict.Add("@login", parametrs[0]);
-                queryParametrsDict.Add("@password", "");
-                queryParametrsDict.Add("@userRights", parametrs[2]);
                 actMessage = "редактирования";
             }
 

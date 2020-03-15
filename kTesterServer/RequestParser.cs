@@ -37,10 +37,6 @@ namespace kTesterServer
             { "SBJ_ADD", "добавил новый пердмет"},
             { "SBJ_DLT", "удалил пердмет"},
             { "SBJ_EDT", "отредактировал пердмет"},
-            { "PRF_GET", "загрузил список профессоров"},
-            { "PRF_ADD", "добавил нового профессора"},
-            { "PRF_DLT", "удалил профессора"},
-            { "PRF_EDT", "отредактировал профессора"},
             { "TEST_GET", "загрузил список тестов" },
             { "TEST_DLT", "удалил тест" }
         };
@@ -64,7 +60,7 @@ namespace kTesterServer
 
             dynamic json = JObject.Parse(requestBody);
             string serverParametr = json.serverParametr;
-            User currentUser = new User((int)json["currentUser"]["Id"], (string)json["currentUser"]["Login"], (string)json["currentUser"]["Password"], (int)json["currentUser"]["UserRights"]);
+            User currentUser = new User((int)json["currentUser"]["Id"], (string)json["currentUser"]["Login"], (int)json["currentUser"]["UserRights"], (string)json["currentUser"]["Name"]);
 
             dynamic dictJson = json.queryParametrsDict;
             string dictStr = Convert.ToString(dictJson);
@@ -75,15 +71,15 @@ namespace kTesterServer
 
             switch (serverParametr)
             {
-                case "USER_AUTH": //Авторизация
-                    //User user = new User((string)json["currentUser"]["Login"],(string)json["currentUser"]["Password"]);
-                    currentUser = DataBase.GetUser(currentUser, serverParametr);
-                    if (currentUser != null)
-                    {
-                        isSuccess = true;
-                        response = JsonConvert.SerializeObject(currentUser);
-                    }
-                    break;
+                //case "USER_AUTH": //Авторизация
+                //    //User user = new User((string)json["currentUser"]["Login"],(string)json["currentUser"]["Password"]);
+                //    //currentUser = DataBase.GetUser(currentUser, serverParametr);
+                //    if (currentUser != null)
+                //    {
+                //        isSuccess = true;
+                //        response = JsonConvert.SerializeObject(currentUser);
+                //    }
+                //    break;
                 case "FAC_GET":  //Список всех факультетов
                 case "USER_GET": //Список пользователей системы
                 case "SGRP_GET":
@@ -96,6 +92,7 @@ namespace kTesterServer
                         response = JsonConvert.SerializeObject(list);
                     }
                     break;
+                case "USER_AUTH":
                 case "LOG_DAT":
                 case "LOG_PRM":
                 case "SGRP_PRM":
@@ -154,19 +151,16 @@ namespace kTesterServer
             }
             if (isSuccess)
             {
-                if (logParams.ContainsKey("PRF_GET_BY_USER"))
+                if (dict.Count > 0)
                 {
-                    if (dict.Count > 0)
-                    {
-                        //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]} " +
-                        //             $"c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
-                        ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]} c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
-                    }
-                    else
-                    {
-                        //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]}");
-                        ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]}");
-                    }
+                    //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]} " +
+                    //             $"c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                    ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]} c параметрами {string.Join(";", dict.Select(x => x.Key + "=" + x.Value).ToArray())}");
+                }
+                else
+                {
+                    //ServerLog.Log($"Пользователь {currentUser.Login} {logParams[serverParametr]}");
+                    ServerLog.BaseLog(currentUser, $"{logParams[serverParametr]}");
                 }
             }
             else

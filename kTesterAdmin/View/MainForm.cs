@@ -35,7 +35,7 @@ namespace kTesterAdmin.View
             InitializeComponent();
 
             //userInfo = new AuthController(1, "admin", "admin", 1);
-            userInfo = new AuthController(1004, "prof3", "123", 2);
+            userInfo = new AuthController(1004, "prof3", 2, "проф3");
             this.MinimumSize = new Size(650, 400);
             OpenAdminMenu(this, null);
         }
@@ -59,7 +59,6 @@ namespace kTesterAdmin.View
             content_metroPanel.Controls.Clear();
             content_metroPanel.Controls.Add(LF);
             LF.Dock = DockStyle.Fill;
-            
         }
 
         private void OpenUsers(object sender, EventArgs e)
@@ -87,7 +86,6 @@ namespace kTesterAdmin.View
             CatalogMenu CM = new CatalogMenu();
             CM.facults_metroTile.Click += OpenFaculties;
             CM.stusyGroups_metroTile.Click += OpenStudyGroups;
-            CM.professors_metroTile.Click += OpenProfessors;
             CM.subjects_metroTile.Click += Subjects_metroTile_Click;
             CM.back_metroTile.Click += OpenAdminMenu;
             menu_metroPanel.Controls.Clear();
@@ -102,16 +100,6 @@ namespace kTesterAdmin.View
             content_metroPanel.Controls.Clear();
             content_metroPanel.Controls.Add(SF);
             SF.Dock = DockStyle.Fill;
-        }
-
-        private void OpenProfessors(object sender, EventArgs e)
-        {
-            this.Text = "kTester - Справочники - Профессоры";
-            this.Refresh();
-            ProfessorsForm PF = new ProfessorsForm(userInfo);
-            content_metroPanel.Controls.Clear();
-            content_metroPanel.Controls.Add(PF);
-            PF.Dock = DockStyle.Fill;
         }
 
         private void OpenStudyGroups(object sender, EventArgs e)

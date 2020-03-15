@@ -24,5 +24,11 @@ namespace kTesterLib.Service
 
 			return userRight.ToString();
 		}
-    }
+
+		public static string GetCryptPass(string password)
+		{
+			//потом сделать зашифровку пароля
+			return password;
+		}
+	}
 }

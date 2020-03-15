@@ -31,7 +31,6 @@
             this.facults_metroTile = new MetroFramework.Controls.MetroTile();
             this.back_metroTile = new MetroFramework.Controls.MetroTile();
             this.subjects_metroTile = new MetroFramework.Controls.MetroTile();
-            this.professors_metroTile = new MetroFramework.Controls.MetroTile();
             this.stusyGroups_metroTile = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
@@ -51,7 +50,7 @@
             // back_metroTile
             // 
             this.back_metroTile.ActiveControl = null;
-            this.back_metroTile.Location = new System.Drawing.Point(3, 427);
+            this.back_metroTile.Location = new System.Drawing.Point(3, 322);
             this.back_metroTile.Name = "back_metroTile";
             this.back_metroTile.Size = new System.Drawing.Size(105, 100);
             this.back_metroTile.Style = MetroFramework.MetroColorStyle.Orange;
@@ -65,7 +64,7 @@
             // subjects_metroTile
             // 
             this.subjects_metroTile.ActiveControl = null;
-            this.subjects_metroTile.Location = new System.Drawing.Point(3, 321);
+            this.subjects_metroTile.Location = new System.Drawing.Point(3, 215);
             this.subjects_metroTile.Name = "subjects_metroTile";
             this.subjects_metroTile.Size = new System.Drawing.Size(105, 100);
             this.subjects_metroTile.TabIndex = 4;
@@ -74,19 +73,6 @@
             this.subjects_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.subjects_metroTile.UseSelectable = true;
             this.subjects_metroTile.UseTileImage = true;
-            // 
-            // professors_metroTile
-            // 
-            this.professors_metroTile.ActiveControl = null;
-            this.professors_metroTile.Location = new System.Drawing.Point(3, 215);
-            this.professors_metroTile.Name = "professors_metroTile";
-            this.professors_metroTile.Size = new System.Drawing.Size(105, 100);
-            this.professors_metroTile.TabIndex = 4;
-            this.professors_metroTile.Text = "Преподаватели";
-            this.professors_metroTile.TileImage = global::kTesterAdmin.Properties.Resources.professors_white_mini;
-            this.professors_metroTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.professors_metroTile.UseSelectable = true;
-            this.professors_metroTile.UseTileImage = true;
             // 
             // stusyGroups_metroTile
             // 
@@ -107,7 +93,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.back_metroTile);
             this.Controls.Add(this.subjects_metroTile);
-            this.Controls.Add(this.professors_metroTile);
             this.Controls.Add(this.stusyGroups_metroTile);
             this.Controls.Add(this.facults_metroTile);
             this.Name = "CatalogMenu";
@@ -120,7 +105,6 @@
 
         public MetroFramework.Controls.MetroTile facults_metroTile;
         public MetroFramework.Controls.MetroTile stusyGroups_metroTile;
-        public MetroFramework.Controls.MetroTile professors_metroTile;
         public MetroFramework.Controls.MetroTile subjects_metroTile;
         public MetroFramework.Controls.MetroTile back_metroTile;
     }

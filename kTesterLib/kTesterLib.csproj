@@ -56,5 +56,8 @@
     <Compile Include="Meta\Subject.cs" />
     <Compile Include="Testing\Test.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

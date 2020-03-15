@@ -14,8 +14,7 @@ namespace kTesterAdmin.Controller
     public class TestController : DefaultController<Test>
     {
 
-        private Professor currentProfessor;
-
+        private User currentUser;
         public TestController(Action<string> info, Action<string> mess, AuthController userController)
             : base(info, mess, userController)
         {
@@ -27,7 +26,7 @@ namespace kTesterAdmin.Controller
                 {"deleteTest", "TEST_DLT" },
             };
 
-            currentProfessor = userController.GetProfessor();
+            currentUser = userController.GetUser();
         }
 
         public override void SetCurrentItem(int id = 0)
@@ -44,10 +43,10 @@ namespace kTesterAdmin.Controller
             queryParametrsDict.Clear();
 
             if (currentUser.UserRights == UserRights.Administrator)
-                queryParametrsDict.Add("@professorId", "0");
+                queryParametrsDict.Add("@userId", "0");
             else
             {
-                if (currentProfessor == null)
+                if (currentUser.UserRights != UserRights.Professor)
                 {
                     information($"Доступ запрещен!");
                     var errorTask = new Task<BindingList<Test>>(() =>
@@ -58,7 +57,7 @@ namespace kTesterAdmin.Controller
                     return errorTask;
                 }
                 else
-                    queryParametrsDict.Add("@professorId", currentProfessor.Id.ToString());
+                    queryParametrsDict.Add("@userId", currentUser.Id.ToString());
             }
 
             var task = new Task<BindingList<Test>>(

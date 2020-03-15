@@ -16,7 +16,6 @@ namespace kTesterAdmin.Controller
         private string serverParametr; 
         [JsonRequired]
         private User currentUser;
-        private Professor currentProfessor;
 
         [JsonRequired]
         private Dictionary<string, string> queryParametrsDict;
@@ -24,62 +23,33 @@ namespace kTesterAdmin.Controller
         {
             return currentUser;
         }
-
-        public Professor GetProfessor()
-        {
-            return currentProfessor;
-        }
         
         public AuthController() 
         {
             serverParametr = "USER_AUTH";
+            currentUser = new User();
             queryParametrsDict = new Dictionary<string, string>();
         }
 
-        public AuthController(int id, string name, string pass, int rights)
+        public AuthController(int id, string login, int rights, string name)
         {
-            currentUser = new User(id, name, pass, rights);
+            currentUser = new User(id, login, rights, name);
             queryParametrsDict = new Dictionary<string, string>();
-            if (currentUser.UserRights == UserRights.Professor)
-                currentProfessor = GetProfessorInfo(currentUser.Id).Result;
-        }
-
-        private Task<Professor> GetProfessorInfo(int userId)
-        {
-            serverParametr = "PRF_GET_BY_USER";
-            queryParametrsDict.Clear();
-            queryParametrsDict.Add("userId", userId.ToString());
-
-            var task = new Task<Professor>(
-                () => 
-                {
-                    Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
-                    if (result.Item1 && result.Item2 != "[]")
-                    {
-                        List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
-                        foreach(var arr in list)
-                        {
-                            Professor professor = new Professor(Convert.ToInt32(arr[0]), arr[1].ToString(), Convert.ToInt32(arr[2]));
-                            return professor;
-                        }
-                            
-                    }
-                    return null;
-                });
-            task.Start();
-            return task;
         }
 
         public Task<Tuple<bool, string>> AuthAsync(string login, string password)
         {
-            currentUser = new User(login, password);
+            queryParametrsDict.Add("@login", Helper.GetCryptPass(login));
+            queryParametrsDict.Add("@password", Helper.GetCryptPass(password));
+
             var task = new Task<Tuple<bool, string>>(
                 () => 
                 {
                     Tuple<bool, string> result = RequestSender.SendRequest(JsonConvert.SerializeObject(this));
                     if (result.Item1)
                     {
-                        currentUser = JsonConvert.DeserializeObject<User>(result.Item2);
+                        List<object[]> list = JsonConvert.DeserializeObject<List<object[]>>(result.Item2);
+                        currentUser = new User(Convert.ToInt32(list[0][0]), list[0][1].ToString(), Convert.ToInt32(list[0][2]), list[0][3].ToString());
                         if (currentUser.Id > 0)
                             return new Tuple<bool, string>(true, "");
                         else
@@ -92,6 +62,6 @@ namespace kTesterAdmin.Controller
                 });
             task.Start();
             return task;
-        }   
+        }
     }
 }
